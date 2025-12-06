@@ -84,7 +84,7 @@ app.post('/checkLogin',async (req,res) => {
   
 try {
         const { username, password } = req.body;
-        const sql = `SELECT * FROM userInfo WHERE username = "${username}"`;
+        const sql = `SELECT * FROM User WHERE User_Name = "${username}"`;
         const result = await queryDB(sql);
 
         if (result.length === 0) {
@@ -93,21 +93,21 @@ try {
         }
 
     const foundUser = result[0];
-    if (foundUser.password === password) {
+    if (foundUser.User_Password === password) {
         console.log("Login success");
-        res.cookie('username', foundUser.username);
+        res.cookie('User_Name', foundUser.User_Name);
         res.cookie('img', foundUser.img); 
         return res.redirect('Home.html');
     }
 
     else {
         console.log("Login fail");
-        return res.redirect('login.html?error=1');
+        return res.redirect('/Login/login.html');
     }
     }
     catch (err) {
         console.error("Error login:", err);
-        return res.redirect('login.html?error=1');
+        return res.redirect('/Login/login.html');
     }
 })
 
