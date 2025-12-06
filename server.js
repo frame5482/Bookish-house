@@ -47,18 +47,20 @@ app.post('/regisDB', async (req,res) => {
     let generatedID = "60" + Math.floor(1000 + Math.random() * 9000);
     
         let sql  = `  CREATE TABLE IF NOT EXISTS User (
-        User_ID VARCHAR(15) NOT NULL,
-        User_Name VARCHAR(100),
-        User_Email VARCHAR(100),
-        User_Birthday DATE,
-        PRIMARY KEY (User_ID)
+                User_ID VARCHAR(15) NOT NULL,
+                User_Name VARCHAR(100),
+                User_Email VARCHAR(100),
+                User_Password VARCHAR(100),
+                User_Birthday DATE,
+                PRIMARY KEY (User_ID)
     )`; 
     let result = await queryDB(sql);
 
-        sql = ` INSERT INTO User (User_ID, User_Name, User_Email, User_Birthday) VALUES (
+        sql = ` INSERT INTO User (User_ID, User_Name, User_Email, User_Password, User_Birthday) VALUES (
         "${generatedID}", 
         "${req.body.username}", 
         "${req.body.email}", 
+        "${req.body.password}",
         "${req.body.birthday}"
     )`;   
     result = await queryDB(sql);
