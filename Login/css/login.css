@@ -156,7 +156,7 @@ body {
 .login-container {
   grid-column: 1 / span 3;
   padding-top: 100px;
-  padding-bottom: 285px;
+  padding-bottom: 175px;
   margin-left: 550px;
   margin-right: 550px;
   text-align: center;
@@ -264,6 +264,9 @@ body {
   color: white;
   font-size: 14px;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 100px;
   padding-bottom: 10px;
+}
+.tab-bottom-container hr{
+    margin-bottom: 25px;
 }

@@ -258,6 +258,9 @@ body {
   color: white;
   font-size: 14px;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 100px;
   padding-bottom: 10px;
+}
+.tab-bottom-container hr{
+    margin-bottom: 25px;
 }
