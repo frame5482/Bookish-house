@@ -8,54 +8,57 @@
 		<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
 	</head>
 	<body>
- <div class = "nav-container">
+  <div class="grid-container">
+  
+    <div class="nav-container">
       <div class="nav-top">
-        <div class = "top-left">
-          <img id ="tab-search" src="../img/Logo_Icon/Tab.png">
-          <img id = "logo" src = "../img/Logo_Icon/Logo.png">
+        <div class="top-left">
+          <img id="tab-search" src="../img/Logo_Icon/Tab.png" class="click-img">
+          <img id="logo" src="../img/Logo_Icon/Logo.png">
         </div>
-        <div class = "top-right">
-          <input id = "search" type="text" placeholder="ค้นหา">
-          <img id = "basket" src = "../img/Logo_Icon/basket.png">
-          <img id = "lineSpace" src = "../img/Logo_Icon/LineSpace.png">
-          <img id = "profile" src = "../img/Logo_Icon/avatar.png">
-          <a class = "login-register" href="#">LOGIN/REGISTER</a>
+        <div class="top-right">
+          <input id="search" type="text" placeholder="ค้นหา">
+          <img id="basket" src="../img/Logo_Icon/basket.png" class="click-img">
+          <img id="lineSpace" src="../img/Logo_Icon/LineSpace.png">
+          <img id="profile" src="../img/Logo_Icon/avatar.png" class="click-img">
+          <a class="login-register" href="#">LOGIN/REGISTER</a>
         </div>
       </div>
-      <div class = "nav-bottom">
-        <a class = "tag-book" href="#">มังงะ</a>
-        <a class = "tag-book" href="#">นิยาย</a>
-        <a class = "tag-book" href="#">หนังสือปรัญชา</a>
-        <a class = "tag-book" href="#">หนังสือพระ</a>
+      <div class="nav-bottom">
+        <a class="tag-book" href="#">มังงะ</a>
+        <a class="tag-book" href="#">นิยาย</a>
+        <a class="tag-book" href="#">หนังสือปรัญชา</a>
+        <a class="tag-book" href="#">หนังสือพระ</a>
       </div>
-  </div>
-
-  <div class = "login-container">
+    </div>
+  
+    <div class="login-container">
       <legend id="loginHead">ลงชื่อเข้าใช้</legend>
       <div id=login-box>
         <form class="form" action="/checkLogin" method="post" accept-charset="utf-8">
-          <div class = "userLogin">
+          <div class="userLogin">
             ชื่อผู้ใช้งาน
           </div>
-            <input class = "inputuser" type="text" name="username" value="" placeholder="" required><br>
-          <div class = "userLogin">
+          <input class="inputuser" type="text" name="username" value="" placeholder="" required><br>
+          <div class="userLogin">
             รหัสผ่าน
           </div>
-            <input class = "inputuser" type="password" name="password" value="" placeholder="" required><br>
-            <div class = "forgetpassword">
-              <a  href="#">ลืมรหัสผ่าน?</a> <br>
-            </div>
-          <input class = "login-button" type="submit" value="Login">
-            <div class = "register-text">
-              <a  href="#">สมัครสมาชิก</a> <br>
-            </div>
+          <input class="inputuser" type="password" name="password" value="" placeholder="" required><br>
+          <div class="forgetpassword">
+            <a href="#">ลืมรหัสผ่าน?</a> <br>
+          </div>
+          <input class="login-button" type="submit" value="Login">
+          <div class="register-text">
+            <a href="#">สมัครสมาชิก</a> <br>
+          </div>
         </form>
       </div>
+    </div>
+    
+    <div class="tab-bottom-container">
+      <p>©BookishHouse Co.,Ltd. All rights Reserved.</p>
+    </div>
+  
   </div>
-
-  <div class = "tab-bottom">
-    <p>©BookishHouse Co.,Ltd. All rights Reserved.</p>
-  <div>
-
 	</body>
 </html>
