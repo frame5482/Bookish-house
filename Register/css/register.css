@@ -91,7 +91,7 @@ body {
     padding-right: 100px;
 }
 
-.login-container {
+.register-container {
 	display: grid;
   grid-template-columns: 20% auto 20%;
   grid-gap: 10px;
@@ -103,11 +103,11 @@ body {
   text-align: center;
 }
 
-.login-container > div{
+.register-container > div{
     text-align: center;
 }
 
-#loginHead{
+#regisHead{
   grid-column: 1 / span 3;
   text-align: center;
   font-weight: bold;
@@ -115,7 +115,7 @@ body {
   font-size: 25px;
 }
 
-#login-box{
+#regis-box{
   grid-column: 2 / span 1;
   background-color: #9797974f;
   border-radius: 10px;
@@ -124,13 +124,13 @@ body {
 }
 
 
-.userLogin{
+.userRegis{
   text-align: left;
   margin-left: 20px;
   margin-top: 10px;
 }
 
-.userLogin::after{
+.userRegis::after{
   content:"*";
   color: red;
   font-weight: bold;
@@ -144,13 +144,7 @@ body {
   box-sizing: border-box;
 }
 
-.forgetpassword{
-  text-align: left;
-  margin-left: 20px;
-  margin-top: 5px;
-}
-
-.login-button{
+.register-button{
   background-color: #ff7b7d;
   color: white;
   font-family: Noto Sans Thai;
@@ -158,11 +152,7 @@ body {
   border-radius: 5px;
   border: white;
   padding: 10px 40px;
-}
-
-.register-text{
-  text-align: center;
-  margin-top: 5px;
+  margin-top: 20px;
 }
 
 .tab-bottom{
