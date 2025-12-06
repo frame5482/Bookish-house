@@ -12,9 +12,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 const con = mysql.createConnection({
      host: "localhost",
     user: "root", 
-    password: "",
-        database: "Bookishhouse"
-
+    password: ""
 })
 
 con.connect(function(err) {
@@ -25,6 +23,13 @@ con.connect(function(err) {
     if (err) throw err;
     console.log("Database created");
   });
+
+    con.changeUser({database : 'Bookishhouse'}, function(err) {
+    if (err) throw err;
+    console.log("Using Database Bookishhouse");
+  });
+   
+
 });
 
 
@@ -89,7 +94,7 @@ try {
 
         if (result.length === 0) {
             console.log("user not found");
-            return res.redirect('login.html?error=1');
+            return res.redirect('login.html');
         }
 
     const foundUser = result[0];

@@ -1,153 +1,104 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Login</title>
-		<link type="text/css" rel="stylesheet" href="css/home.css">
-		<script type="text/javascript" src="js/main.js"></script>
-		<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
-	</head>
-	<body>
+<head>
+    <meta charset="UTF-8">
+    <title>BookishHouse</title>
+    <link rel="stylesheet" href="css/home.css">
+    <script src="Home.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
     <div class="grid-container">
+        <div class="nav-container">
+            <div class="nav-top">
+                <div class="top-left">
+                    <img id="tab-search" src="../img/Logo_Icon/Tab.png" class="click-img">
+                    <img id="logo" src="../img/Logo_Icon/Logo.png">
+                </div>
+                <div class="top-right">
+                    <input id="search" type="text" placeholder="ค้นหา">
+                    <img id="basket" src="../img/Logo_Icon/basket.png" class="click-img">
+                    <img id="lineSpace" src="../img/Logo_Icon/LineSpace.png">
+                    <img id="profile" src="../img/Logo_Icon/avatar.png" class="click-img">
+                    <a class="login-register" href="#">LOGIN/REGISTER</a>
+                </div>
+            </div>
+            <div class="nav-bottom">
+                <a class="tag-book" href="#">มังงะ</a>
+                <a class="tag-book" href="#">นิยาย</a>
+                <a class="tag-book" href="#">หนังสือปรัญชา</a>
+                <a class="tag-book" href="#">หนังสือพระ</a>
+            </div>
+        </div>
 
-      <div class="nav-container">
-        <div class="nav-top">
-          <div class="top-left">
-            <img id="tab-search" src="../img/Logo_Icon/Tab.png" class="click-img">
-            <img id="logo" src="../img/Logo_Icon/Logo.png">
-          </div>
-          <div class="top-right">
-            <input id="search" type="text" placeholder="ค้นหา">
-            <img id="basket" src="../img/Logo_Icon/basket.png" class="click-img">
-            <img id="lineSpace" src="../img/Logo_Icon/LineSpace.png">
-            <img id="profile" src="../img/Logo_Icon/avatar.png" class="click-img">
-            <a class="login-register" href="#">LOGIN/REGISTER</a>
-          </div>
-        </div>
-        <div class="nav-bottom">
-          <a class="tag-book" href="#">มังงะ</a>
-          <a class="tag-book" href="#">นิยาย</a>
-          <a class="tag-book" href="#">หนังสือปรัญชา</a>
-          <a class="tag-book" href="#">หนังสือพระ</a>
-        </div>
-      </div>
-    
-      <div class="home-container">
-        <div class="home-header">
-          ยอดนิยมประจำสัปดาห์
-        <div class="book-slide">
-          <button class="slide-button">❮</button>
-            <div class="book-famous">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga1.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga2.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga3.png">
+
+        
+        <div class="home-container">
+
+            <div class="home-header">ยอดนิยมประจำสัปดาห์</div>
+            <div class="book-slide">
+                <button class="slide-button prev-famous">❮</button>
+                <div id="famous-container" class="book"></div>
+                <button class="slide-button next-famous">❯</button>
             </div>
-          <button class="slide-button">❯</button>
-        </div>
-        <div class="home-header">
-          มังงะ
-          <input class="tag-button" type="submit" value="ดูทั้งหมด">
-        </div><br>
-            <div class="book">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga1.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga2.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga3.png">
-            </div><br>
-            <div class="book">
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 1 (ฉบับการ์ตูน)</div>
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 2 (ฉบับการ์ตูน)</div>
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 3 (ฉบับการ์ตูน)</div>
-            </div>
-            <div class="book">
-              <div class="book-price">159.00 บาท</div>
-              <div class="book-price">159.00 บาท</div>
-              <div class="book-price">159.00 บาท</div>
-            </div>
-            <div class="book">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-            </div>
+
+
             
-        <div class="home-header">
-          นิยาย
-          <input class="tag-button" type="submit" value="ดูทั้งหมด">
-        </div><br>
-          <div class="book">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga1.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga2.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga3.png">
-            </div><br>
-            <div class="book">
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 1 (ฉบับการ์ตูน)</div>
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 2 (ฉบับการ์ตูน)</div>
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 3 (ฉบับการ์ตูน)</div>
+            <div class="home-header">
+                มังงะ
+                <input class="tag-button" type="submit" value="ดูทั้งหมด">
+                <button class="slide-button prev-manga">❮</button>
+                <button class="slide-button next-manga">❯</button>
             </div>
-            <div class="book">
-              <div class="book-price">159.00 บาท</div>
-              <div class="book-price">159.00 บาท</div>
-              <div class="book-price">159.00 บาท</div>
-            </div>
-            <div class="book">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
+            <div class="book-slide">
+                
+                <div id="manga-container" class="book"></div>
+                
             </div>
 
-        <div class="home-header">
-          หนังสือปรัญชา
-          <input class="tag-button" type="submit" value="ดูทั้งหมด">
-        </div><br>
-          <div class="book">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga1.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga2.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga3.png">
-            </div><br>
-            <div class="book">
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 1 (ฉบับการ์ตูน)</div>
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 2 (ฉบับการ์ตูน)</div>
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 3 (ฉบับการ์ตูน)</div>
+            <div class="home-header">
+                นิยาย
+                <input class="tag-button" type="submit" value="ดูทั้งหมด">
+                <button class="slide-button prev-novel">❮</button>
+                <button class="slide-button next-novel">❯</button>
             </div>
-            <div class="book">
-              <div class="book-price">159.00 บาท</div>
-              <div class="book-price">159.00 บาท</div>
-              <div class="book-price">159.00 บาท</div>
-            </div>
-            <div class="book">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
+            <div class="book-slide">
+                
+                <div id="novel-container" class="book"></div>
+            
             </div>
 
-        <div class="home-header">
-          หนังสือพระ
-          <input class="tag-button" type="submit" value="ดูทั้งหมด">
-        </div><br>
-          <div class="book">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga1.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga2.png">
-              <img class="book-img" src="../img/Book_Img/Alya-book-manga3.png">
-            </div><br>
-            <div class="book">
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 1 (ฉบับการ์ตูน)</div>
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 2 (ฉบับการ์ตูน)</div>
-              <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 3 (ฉบับการ์ตูน)</div>
+            <div class="home-header">
+                หนังสือปรัญชา
+                <input class="tag-button" type="submit" value="ดูทั้งหมด">
+                 <button class="slide-button prev-philo">❮</button>
+                 <button class="slide-button next-philo">❯</button>
             </div>
-            <div class="book">
-              <div class="book-price">159.00 บาท</div>
-              <div class="book-price">159.00 บาท</div>
-              <div class="book-price">159.00 บาท</div>
+            <div class="book-slide">
+               
+                <div id="Philosophy-container" class="book"></div>
+              
             </div>
-            <div class="book">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-              <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
+
+
+
+            <div class="home-header">
+                หนังสือพระ
+                <input class="tag-button" type="submit" value="ดูทั้งหมด">
+                <button class="slide-button prev-buddhist">❮</button>
+                <button class="slide-button next-buddhist">❯</button>
             </div>
-      </div>
+            <div class="book-slide">
+                
+                <div id="Buddhist-container" class="book"></div>
+              
+            </div>
+
+        </div>
+
+        <div class="tab-bottom-container">
+            <p>©BookishHouse Co.,Ltd. All rights Reserved.</p>
+        </div>
     </div>
-      <div class="tab-bottom-container">
-        <p>©BookishHouse Co.,Ltd. All rights Reserved.</p>
-      </div>
-    
-	</body>
+</body>
 </html>
