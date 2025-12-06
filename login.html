@@ -30,8 +30,27 @@
       </div>
   </div>
 
-  <div class = "">
-
+  <div class = "login-container">
+      <legend id="loginHead">ลงชื่อเข้าใช้</legend>
+      <div id=login-box>
+        <form class="form" action="/checkLogin" method="post" accept-charset="utf-8">
+          <div class = "userLogin">
+            ชื่อผู้ใช้งาน
+          </div>
+            <input class = "inputuser" type="text" name="username" value="" placeholder="" required><br>
+          <div class = "userLogin">
+            รหัสผ่าน
+          </div>
+            <input class = "inputuser" type="password" name="password" value="" placeholder="" required><br>
+            <div class = "forgetpassword">
+              <a  href="#">ลืมรหัสผ่าน?</a> <br>
+            </div>
+          <input class = "login-button" type="submit" value="Login">
+            <div class = "register-text">
+              <a  href="#">สมัครสมาชิก</a> <br>
+            </div>
+        </form>
+      </div>
   </div>
 
   <div class = "tab-bottom">

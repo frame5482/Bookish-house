@@ -30,8 +30,25 @@
       </div>
   </div>
 
-  <div class = "">
-
+  <div class = "register-container">
+      <legend id="loginHead">สมัครสมาชิก</legend>
+      <div id=login-box>
+        <form class="form" action="/regisDB" method="post" accept-charset="utf-8">
+          <div class = "userLogin">
+            ชื่อผู้ใช้งาน
+          </div>
+            <input class = "inputuser" type="text" name="username" value="" placeholder="" required><br>
+          <div class = "userLogin">
+            อีเมล
+          </div>
+            <input  class = "inputuser" type="email" name="email" value="" placeholder="" required><br>
+            <div class = "userLogin">
+            รหัสผ่าน
+          </div>
+            <input  class = "inputuser" type="password" name="password]" value="" placeholder="" required><br>
+          <input class = "register-button" type="submit" value="Register">
+        </form>
+      </div>
   </div>
 
   <div class = "tab-bottom">
