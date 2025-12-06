@@ -1,0 +1,202 @@
+body {
+  font-family: Noto Sans Thai;
+  margin: 0;
+  background-color: rgb(253, 251, 248);
+  color: #333;
+}
+
+#tab-search{
+    width: 6%;
+    height: auto;
+    margin-left: 15px;
+}
+
+#logo{
+    width: 10%;
+    height: auto;
+}
+
+#profile,#basket{
+    width: 4%;
+    height: auto;
+}
+
+#lineSpace{
+    height: auto;
+}
+
+#search{
+  text-align: left;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  background-color: #A13F3F;
+  width: 200px;
+  color: white;
+  font-size: 18px;
+  border: white;
+  font-family: Noto Sans Thai;
+}
+
+#search::placeholder{
+  color: white;
+}
+
+.login-register{
+  text-align: right;
+}
+
+.nav-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FF4C4F;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 10px;
+}
+
+.top-left{
+  grid-column: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px; /*What gap is? = https://www.w3schools.com/cssref/css3_pr_gap.php*/
+  text-align: left;
+}
+
+.top-right{
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px; /*What gap is? = https://www.w3schools.com/cssref/css3_pr_gap.php*/
+  text-align: right;
+}
+.nav-bottom{
+    grid-column: 1 / 3 span;
+    background-color: #9797974f;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 5px #5c5c5c7a;
+}
+
+.tag-book{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.login-container {
+	display: grid;
+  grid-template-columns: 20% auto 20%;
+  grid-gap: 10px;
+  align-items: start;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin-left: 550px;
+  margin-right: 550px;
+  text-align: center;
+}
+
+.login-container > div{
+    text-align: center;
+}
+
+#loginHead{
+  grid-column: 1 / span 3;
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 10px;
+  font-size: 25px;
+}
+
+#login-box{
+  grid-column: 2 / span 1;
+  background-color: #9797974f;
+  border-radius: 10px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+
+.userLogin{
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.userLogin::after{
+  content:"*";
+  color: red;
+  font-weight: bold;
+}
+
+.inputuser{
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: white;
+  width: 95%;
+  box-sizing: border-box;
+}
+
+.forgetpassword{
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.login-button{
+  background-color: #ff7b7d;
+  color: white;
+  font-family: Noto Sans Thai;
+  font-size: 24px;
+  border-radius: 5px;
+  border: white;
+  padding: 10px 40px;
+}
+
+.register-text{
+  text-align: center;
+  margin-top: 5px;
+}
+
+.register-button{
+  background-color: #ff7b7d;
+  color: white;
+  font-family: Noto Sans Thai;
+  font-size: 24px;
+  border-radius: 5px;
+  border: white;
+  padding: 10px 40px;
+  margin-top: 20px;
+}
+
+.register-container {
+	display: grid;
+  grid-template-columns: 20% auto 20%;
+  grid-gap: 10px;
+  align-items: start;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  margin-left: 550px;
+  margin-right: 550px;
+  text-align: center;
+}
+
+.tab-bottom{
+  background-color: #FF4C4F;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 0; 
+  width: 100%; 
+}
