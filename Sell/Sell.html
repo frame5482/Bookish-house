@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Sell Product</title>
     <link type="text/css" rel="stylesheet" href="css/sell.css">
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="Sell.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
   </head>
   <body class="sell-page">
@@ -42,90 +42,71 @@
       <main class="sell-container">
         <h1 class="sell-title">ลงสินค้า</h1>
 
-        <section class="sell-card">
-          <div class="sell-layout">
-            <!-- ซ้าย: รูปภาพสินค้า -->
-            <div class="image-section">
-              <div class="image-preview" id="imagePreview">
-                <!-- เวลา JS ทำงานค่อยเปลี่ยนเป็นรูปจริง -->
-                <span class="image-placeholder-icon"><img src=""></span>
-              </div>
+        <form id="addBookForm" enctype="multipart/form-data">
+        
+            <section class="sell-card">
+              <div class="sell-layout">
+                <div class="image-section">
+                  <div class="image-preview" id="imagePreview">
+                    <span class="image-placeholder-icon"><img src=""></span>
+                  </div>
 
-              <!-- input file ซ่อน ไว้ให้ JS เรียก -->
-              <input type="file" id="product-image-input" accept="image/*" hidden>
+                  <input type="file" id="product-image-input" name="image" accept="image/*" hidden>
 
-              <button class="image-upload-btn" id="btnUploadImage">
-                เพิ่มรูปภาพ
-              </button>
-            </div>
-
-            <!-- ขวา: ฟอร์มข้อมูลหนังสือ -->
-            <div class="form-section">
-              <div class="form-inner">
-
-                <div class="form-row">
-                  <label for="book-title">ชื่อหนังสือ :</label>
-                  <input
-                    type="text"
-                    id="book-title"
-                    class="text-input"
-                    placeholder="เช่น คากุระบาชิ เล่ม 1">
+                  <button type="button" class="image-upload-btn" id="btnUploadImage">
+                    เพิ่มรูปภาพ
+                  </button>
                 </div>
 
-                <div class="form-row">
-                  <label for="book-price">ราคา :</label>
-                  <input
-                    type="number"
-                    id="book-price"
-                    class="text-input"
-                    placeholder="เช่น 115.00">
-                  <span class="inline-unit">บาท</span>
-                </div>
+                <div class="form-section">
+                  <div class="form-inner">
 
-                <div class="form-row">
-                  <label for="book-category">ประเภทหนังสือ :</label>
-                  <select id="book-category" class="text-input select-input">
-                    <option value="" selected disabled>เลือกประเภทหนังสือ</option>
-                    <option value="มังงะ">มังงะ</option>
-                    <option value="นิยาย">นิยาย</option>
-                    <option value="หนังสือปรัญชา">หนังสือปรัญชา</option>
-                    <option value="หนังสือพระ">หนังสือพระ</option>
-                  </select>
-                </div>
+                    <div class="form-row">
+                      <label for="book-title">ชื่อหนังสือ :</label>
+                      <input type="text" id="book-title" name="title" class="text-input" placeholder="เช่น คากุระบาชิ เล่ม 1" required>
+                    </div>
 
-                <div class="form-row">
-                  <label for="book-tag">Tag :</label>
-                  <input
-                    type="text"
-                    id="book-tag"
-                    class="text-input"
-                    placeholder="เช่น Action, Romance">
-                </div>
+                    <div class="form-row">
+                      <label for="book-price">ราคา :</label>
+                      <input type="number" id="book-price" name="price" class="text-input" placeholder="เช่น 115.00" required>
+                      <span class="inline-unit">บาท</span>
+                    </div>
 
-                <div class="form-row form-row-full">
-                  <label for="book-description">รายละเอียดสินค้า :</label>
-                  <textarea
-                    id="book-description"
-                    class="text-input textarea-input"
-                    rows="6"
-                    placeholder="เขียนเนื้อหาย่อ / รายละเอียดหนังสือที่ต้องการแสดงบนหน้า Home"></textarea>
-                </div>
+                    <div class="form-row">
+                      <label for="book-category">ประเภทหนังสือ :</label>
+                      <select id="book-category" name="category" class="text-input select-input" required>
+                        <option value="" selected disabled>เลือกประเภทหนังสือ</option>
+                        <option value="มังงะ">มังงะ</option>
+                        <option value="นิยาย">นิยาย</option>
+                        <option value="หนังสือปรัญชา">หนังสือปรัญชา</option>
+                        <option value="หนังสือพระ">หนังสือพระ</option>
+                      </select>
+                    </div>
 
-              </div>
+                    <div class="form-row">
+                      <label for="book-tag">Tag :</label>
+                      <input type="text" id="book-tag" name="tags" class="text-input" placeholder="เช่น Action, Romance">
+                    </div>
 
-              <!-- ปุ่มเพิ่มสินค้า -->
-              <div class="form-footer">
-                <button class="submit-btn" id="btnSubmitProduct">
-                  เพิ่มสินค้า
-                </button>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+                    <div class="form-row form-row-full">
+                      <label for="book-description">รายละเอียดสินค้า :</label>
+                      <textarea id="book-description" name="description" class="text-input textarea-input" rows="6" placeholder="รายละเอียด..."></textarea>
+                    </div>
+
+                  </div>
+
+                  <div class="form-footer">
+                    <button class="submit-btn" type="submit">
+                         เพิ่มสินค้า
+                     </button>
+                  </div>
+                  
+                </div> 
+              </div> 
+            </section> 
+        </form> </main>
     </div>
 
-    <!-- เส้น + ข้อความล่าง -->
     <div class="tab-bottom-container">
       <hr>
       <p>©BookishHouse Co.,Ltd. All rights Reserved.</p>

@@ -252,12 +252,17 @@ body {
     justify-content: flex-end;
     background-color: #FF4C4F;
     border-radius: 5px;
-    padding: 10px;
+    padding: 1px;
+     position: absolute;
+    top: -4%;        
+    left: 0;      
+    width: 100%; 
 }
 
 #quickview-close {
     width: 2%;
     height: auto;
+    
 }
 
 .quickview-content {
@@ -429,11 +434,24 @@ body {
 
 .book-img {
     width: 50%;
+<<<<<<< HEAD
     aspect-ratio: 312/445; /*use for define the ratio between width and height ใช้กำหนดขนาดได้เวลาปรับจะได้ดูดีด้วย https://www.w3schools.com/cssref/css_pr_aspect-ratio.php*/
+=======
+    aspect-ratio: 312/445; 
+>>>>>>> origin/Backend
     object-fit: cover;
     margin: 0 5%;
     transition: transform 0.3s ease;
 }
+
+.book-imgf {
+    width: 100%;
+    aspect-ratio: 312/445; 
+    object-fit: cover;
+    margin: 0% 5%;
+    transition: transform 0.3s ease;
+}
+
 
 .slide-button {
     background: none;
@@ -475,46 +493,153 @@ body {
     opacity: 1;
 }
 
-.book {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
+.book-slide{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0px;
+  margin-bottom: 150px;
 }
 
+.book-famous{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+.book-img{
+  width: 312px;
+  height: 445px;
+  object-fit: cover;
+  margin: 0 20px;
+  transition: transform 0.3s ease;
+}
+
+.slide-button{
+  background: none;
+  border: none;
+  font-size: 40px;
+  cursor: pointer;
+  color: black;
+  transition: opacity 0.3s ease, transform 0.2 ease;
+  margin: 0 100px;
+}
+
+.slide-button:hover{
+  opacity: 0.6;
+  transform: scale(1.05);
+}
+
+.slide-button:active{
+  transform: scale(0.95);
+}
+
+.tag-button{
+  background-color: #ff7b7d;
+  color: white;
+  font-family: Noto Sans Thai;
+  font-size: 16px;
+  border-radius: 5px;
+  border: white;
+  padding: 5px 20px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tag-button:hover{
+  cursor: pointer;
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.tag-button:active{
+  opacity: 1;
+}
+.book-slide {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    padding: 0 50px; 
+    overflow: visible; 
+    position: relative;
+}
+
+
+.book {
+  
+  display: flex;
+  gap: 30px;
+   overflow-x: hidden; 
+  scroll-behavior: smooth;
+  padding: 10px 0;
+}
+
+.book::-webkit-scrollbar {
+  height: 8px;
+}
+
+.book::-webkit-scrollbar-thumb {
+  background: #FF4C4F;
+  border-radius: 4px;
+}
+.book-item {
+    flex: 0 0 auto;
+    width: 150px;
+    text-align: center;
+    margin: 0 10px;
+}
+
+.book-img {
+  width: 150px;
+  height: 220px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.book-img:hover { transform: scale(1.05); }
+
 .book-name {
-    text-align: left;
-    padding: 5px 50px;
+  text-align: left;
+  padding: 5px;
+  font-size: 16px;
 }
 
 .book-price {
-    text-align: left;
-    justify-content: left;
-    padding: 15px 50px;
+  text-align: left;
+  padding: 5px;
+  font-size: 14px;
 }
 
 .add-basket {
-    background-color: #ff7b7d;
-    color: white;
-    font-family: Noto Sans Thai;
-    font-size: 24px;
-    border-radius: 5px;
-    border: white;
-    padding: 10px 25px;
-    margin-bottom: 50px;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  background-color: #ff7b7d;
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  padding: 8px 15px;
+  margin-top: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.add-basket:hover {
-    cursor: pointer;
-    opacity: 0.5;
-    transform: scale(0.98);
+.add-basket:hover { opacity: 0.7; transform: scale(1.02); }
+
+/* =================== Slide Buttons =================== */
+.slide-button {
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: opacity 0.3s ease, transform 0.2s ease;
 }
 
-.add-basket:active {
-    opacity: 1;
-}
+.slide-button:hover { opacity: 0.6; transform: scale(1.05); }
+.slide-button:active { transform: scale(0.95); }
 
+/* =================== Footer =================== */
 .tab-bottom-container {
+<<<<<<< HEAD
     grid-column: 1 / span 3;
     background-color: #FF4C4F;
     color: white;
@@ -539,3 +664,12 @@ body {
 @media (max-width: 480px) {
 
 }
+=======
+  grid-column: 1 / span 3;
+  background-color: #FF4C4F;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+}
+>>>>>>> origin/Backend
