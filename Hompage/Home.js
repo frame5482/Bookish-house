@@ -51,6 +51,10 @@ function renderBooks(data) {
             nameDiv.innerText = book.Book_Name;
             itemWrapper.appendChild(nameDiv);
 
+            const QuantityDiv = document.createElement('div');
+            QuantityDiv.className = 'book-quantity';
+            QuantityDiv.innerText = "คงเหลือ: " + (book.Book_Quantity || "ไม่ระบุ") + " เล่ม";
+            itemWrapper.appendChild(QuantityDiv);
             // --- ส่วนราคา ---
             const priceDiv = document.createElement('div');
             priceDiv.className = 'book-price';
@@ -94,31 +98,27 @@ const qvquantity = document.getElementById('quickview-quantity');
 const qvQuantityDisplay = document.getElementById('add-quantity');
 let currentQuantity = 1;
 
-// ฟังก์ชันเปิด Quick View
+
+//  Quick View
+
 function openQuickView(book) {
     if (!quickViewModal) return;
 
-    // อัปเดตข้อมูลข้างใน
     qvTitle.innerText = book.Book_Name;
     qvPrice.innerText = parseFloat(book.Book_Price).toFixed(2) + ' บาท';
     qvImg.src = '../img/Book_Img/' + book.Book_Img;
     
-    // ใส่รายละเอียด (ถ้าใน JSON ไม่มี key นี้ ข้าใส่ข้อความ default ให้)
-    qvDetail.innerText = book.Description || "รายละเอียดเพิ่มเติมของหนังสือเล่มนี้ กำลังรอการบันทึกจากบรรณารักษ์...";
+    qvDetail.innerText = book.Book_Detail || "รายละเอียดเพิ่มเติมของหนังสือเล่มนี้ กำลังรอการบันทึกจากบรรณารักษ์...";
     qvquantity.innerText = "คงเหลือ: " + (book.Book_Quantity || "ไม่ระบุ") + " เล่ม";
-    // รีเซ็ตจำนวน
     currentQuantity = 1;
     if(qvQuantityDisplay) qvQuantityDisplay.innerText = 'x' + currentQuantity;
 
-    // แสดงผล
     quickViewModal.style.display = 'flex'; 
     if(overlay) overlay.style.display = 'block';
     
-    // บังคับให้ container ของ overlay แสดงด้วย (ตาม HTML ท่านมี wrapper อีกชั้น)
     const overlayWrapper = document.querySelector('.overlay-container');
     if(overlayWrapper) overlayWrapper.style.display = 'block';
 }
-// ฟังก์ชันปิด Quick View
 function closeQuickView() {
     if(quickViewModal) quickViewModal.style.display = 'none';
     if(overlay) overlay.style.display = 'none';

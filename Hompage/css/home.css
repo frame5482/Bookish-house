@@ -605,7 +605,12 @@ body {
   padding: 5px;
   font-size: 14px;
 }
-
+.book-quantity {
+  text-align: left;
+  padding: 5px;
+  font-size: 14px;
+  color: #555;
+}
 .add-basket {
   background-color: #ff7b7d;
   color: white;
