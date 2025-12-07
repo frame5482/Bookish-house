@@ -8,28 +8,75 @@
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+    
     <div class="grid-container">
-        <div class="nav-container">
-            <div class="nav-top">
-                <div class="top-left">
-                    <img id="tab-search" src="../img/Logo_Icon/Tab.png" class="click-img">
-                    <img id="logo" src="../img/Logo_Icon/Logo.png">
-                </div>
-                <div class="top-right">
-                    <input id="search" type="text" placeholder="ค้นหา">
-                    <img id="basket" src="../img/Logo_Icon/basket.png" class="click-img">
-                    <img id="lineSpace" src="../img/Logo_Icon/LineSpace.png">
-                    <img id="profile" src="../img/Logo_Icon/avatar.png" class="click-img">
-                    <a class="login-register" href="#">LOGIN/REGISTER</a>
-                </div>
+       <div class="nav-container">
+        <div class="nav-top">
+          <div class="top-left">
+            <img id="tab-search" src="../img/Logo_Icon/Tab.png" class="click-img">
+            <img id="logo" src="../img/Logo_Icon/Logo.png">
+          </div>
+          <div class="top-right">
+            <div class="search-box">
+                <img id="searchimg" src="../img/Logo_Icon/search.png">
+                <input id="search" type="text" placeholder="ค้นหา">
             </div>
-            <div class="nav-bottom">
-                <a class="tag-book" href="#">มังงะ</a>
-                <a class="tag-book" href="#">นิยาย</a>
-                <a class="tag-book" href="#">หนังสือปรัญชา</a>
-                <a class="tag-book" href="#">หนังสือพระ</a>
-            </div>
+            <img id="basket" src="../img/Logo_Icon/basket.png" class="click-img">
+            <img id="lineSpace" src="../img/Logo_Icon/LineSpace.png">
+            <img id="profile" src="../img/Logo_Icon/avatar.png" class="click-img">
+            <a class="login-register" href="#">LOGIN/REGISTER</a>
+          </div>
         </div>
+
+        <div class="overlay-container">
+          <div id="overlay">
+          <div id="side-menu">
+            <div class="tag-header">
+              Tag
+            </div>
+            <a class="tag-category" href="#">ACTION</a> <hr>
+            <a class="tag-category" href="#">Romance</a> <hr>
+            <a class="tag-category" href="#">Comedy</a> <hr>
+            <a class="tag-category" href="#">Fantasy</a> <hr>
+          </div>
+         </div>
+        </div>
+
+
+        <div class="nav-bottom">
+          <a class="tag-book" href="#">มังงะ</a>
+          <a class="tag-book" href="#">นิยาย</a>
+          <a class="tag-book" href="#">หนังสือปรัญชา</a>
+          <a class="tag-book" href="#">หนังสือพระ</a>
+        </div>
+
+
+        <div id="quickview-container">
+          <div class=quickview-top>
+            <img id="quickview-close" src="../img/Logo_Icon/close.png" class="click-img">
+          </div>
+          <div class="quickview-content">
+            <div class="quickview-left">
+              <img class="quickview-img" src="../img/Book_Img/Alya-book-manga1.png">
+            </div>
+            <div class="quickview-right">
+              <p id="quickview-title"></p>
+              <p id="quickview-price"></p>
+              <p id="quickview-quantity"></p>
+              <div class="up-downQuantity">
+                <button class="add-button">-</button>
+                <span id="add-quantity">x1</span>
+                <button class="add-button">+</button>
+              </div>
+              <p class="quickview-detail" id="quickview-detail">
+              </p>
+              <hr><input class="quickview-button" type="submit" value="สั่งซื้อเลย">
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    
 
 
         
@@ -77,7 +124,7 @@
             <div class="book-slide">
                
                 <div id="Philosophy-container" class="book"></div>
-                
+
             </div>
 
 

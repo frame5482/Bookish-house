@@ -141,58 +141,6 @@ body {
     transform: scale(0.95);
 }
 
-#overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #ff4c4f79;
-    display: none;
-    /*none = close overlay and block to open*/
-    z-index: 100;
-    /*what z-index can do? = use to make text or image infront or behind ไว้หน้าหลังจัดลำดับได้ https://www.w3schools.com/cssref/pr_pos_z-index.php*/
-}
-
-.tag-header {
-    font-size: 24px;
-    font-weight: bold;
-    background-color: #F63336;
-    padding: 30px;
-}
-
-.tag-category {
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    justify-items: center;
-    display: block;
-    margin: 15px 0px;
-    transition: opacity 0.3s ease, transform 0.2s ease;
-}
-
-.tag-category:hover {
-    opacity: 0.5;
-    transform: scale(1.05);
-}
-
-.tag-category:active {
-    transform: scale(0.95);
-}
-
-#side-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    background: #FF4C4F;
-    color: white;
-    display: none;
-    /*none = close overlay and block to open*/
-    z-index: 100;
-}
-
 .nav-bottom {
     grid-column: 1 / span 3;
     background-color: #9797974f;
@@ -227,6 +175,19 @@ body {
     padding-right: 100px;
 }
 
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff4c4f79;
+    display: none;
+    /*none = close overlay and block to open*/
+    z-index: 100;
+    /*what z-index can do? = use to make text or image infront or behind ไว้หน้าหลังจัดลำดับได้ https://www.w3schools.com/cssref/pr_pos_z-index.php*/
+}
+
 #quickview-container {
     position: fixed;
     top: 50%;
@@ -251,17 +212,12 @@ body {
     justify-content: flex-end;
     background-color: #FF4C4F;
     border-radius: 5px;
-    padding: 1px;
-     position: absolute;
-    top: -4%;        
-    left: 0;      
-    width: 100%; 
+    padding: 10px;
 }
 
 #quickview-close {
     width: 2%;
     height: auto;
-    
 }
 
 .quickview-content {
@@ -400,7 +356,7 @@ body {
 }
 
 
-.home-container {
+.storage-container {
     grid-column: 1 / span 3;
     margin-top: 50px;
     padding-bottom: 100px;
@@ -411,223 +367,78 @@ body {
     font-size: 24px;
 }
 
-.home-container>div {
+.storage-container>div {
     text-align: left;
 }
 
-.book-slide {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 0px;
-    margin-bottom: 150px;
+.book-box{
+    width: 100%;
+    height: 100%;
+    padding: 3% 0%;
+    border-radius: 1%;
 }
 
-.book-famous {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
+.book-header{
+    margin-left: 3%;
 }
 
 .book-img {
-    width: 312px;
-    height: 445px;
+    width: 50%;
+    aspect-ratio: 312/445; /*use for define the ratio between width and height ใช้กำหนดขนาดได้เวลาปรับจะได้ดูดีด้วย https://www.w3schools.com/cssref/css_pr_aspect-ratio.php*/
     object-fit: cover;
     margin: 0 20px;
     transition: transform 0.3s ease;
 }
 
-.slide-button {
-    background: none;
-    border: none;
-    font-size: 40px;
-    cursor: pointer;
-    color: black;
-    transition: opacity 0.3s ease, transform 0.2 ease;
-    margin: 0 100px;
+.book {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
 }
 
-.slide-button:hover {
-    opacity: 0.6;
-    transform: scale(1.05);
+.book-name {
+    text-align: left;
+    padding: 5px 50px;
 }
 
-.slide-button:active {
-    transform: scale(0.95);
+.book-price {
+    text-align: left;
+    justify-content: left;
+    padding: 15px 50px;
 }
 
-.tag-button {
+.add-basket {
     background-color: #ff7b7d;
     color: white;
     font-family: Noto Sans Thai;
-    font-size: 16px;
+    font-size: 24px;
     border-radius: 5px;
     border: white;
-    padding: 5px 20px;
+    padding: 2% 3%;
+    margin-bottom: 10%;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.tag-button:hover {
+.add-basket:hover {
     cursor: pointer;
     opacity: 0.5;
     transform: scale(0.98);
 }
 
-.tag-button:active {
+.add-basket:active {
     opacity: 1;
 }
 
-.book-slide{
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 0px;
-  margin-bottom: 150px;
-}
-
-.book-famous{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
-}
-
-.book-img{
-  width: 312px;
-  height: 445px;
-  object-fit: cover;
-  margin: 0 20px;
-  transition: transform 0.3s ease;
-}
-
-.slide-button{
-  background: none;
-  border: none;
-  font-size: 40px;
-  cursor: pointer;
-  color: black;
-  transition: opacity 0.3s ease, transform 0.2 ease;
-  margin: 0 100px;
-}
-
-.slide-button:hover{
-  opacity: 0.6;
-  transform: scale(1.05);
-}
-
-.slide-button:active{
-  transform: scale(0.95);
-}
-
-.tag-button{
-  background-color: #ff7b7d;
-  color: white;
-  font-family: Noto Sans Thai;
-  font-size: 16px;
-  border-radius: 5px;
-  border: white;
-  padding: 5px 20px;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.tag-button:hover{
-  cursor: pointer;
-  opacity: 0.5;
-  transform: scale(0.98);
-}
-
-.tag-button:active{
-  opacity: 1;
-}
-.book-slide {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; 
-    padding: 0 50px; 
-    overflow: visible; 
-    position: relative;
-}
-
-
-.book {
-  
-  display: flex;
-  gap: 30px;
-   overflow-x: hidden; 
-  scroll-behavior: smooth;
-  padding: 10px 0;
-}
-
-.book::-webkit-scrollbar {
-  height: 8px;
-}
-
-.book::-webkit-scrollbar-thumb {
-  background: #FF4C4F;
-  border-radius: 4px;
-}
-.book-item {
-    flex: 0 0 auto;
-    width: 150px;
-    text-align: center;
-    margin: 0 10px;
-}
-
-.book-img {
-  width: 150px;
-  height: 220px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.book-img:hover { transform: scale(1.05); }
-
-.book-name {
-  text-align: left;
-  padding: 5px;
-  font-size: 16px;
-}
-
-.book-price {
-  text-align: left;
-  padding: 5px;
-  font-size: 14px;
-}
-
-.add-basket {
-  background-color: #ff7b7d;
-  color: white;
-  font-size: 14px;
-  border-radius: 5px;
-  border: none;
-  padding: 8px 15px;
-  margin-top: 5px;
-  cursor: pointer;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.add-basket:hover { opacity: 0.7; transform: scale(1.02); }
-
-/* =================== Slide Buttons =================== */
-.slide-button {
-  background: none;
-  border: none;
-  font-size: 30px;
-  cursor: pointer;
-  margin: 0 10px;
-  transition: opacity 0.3s ease, transform 0.2s ease;
-}
-
-.slide-button:hover { opacity: 0.6; transform: scale(1.05); }
-.slide-button:active { transform: scale(0.95); }
-
-/* =================== Footer =================== */
 .tab-bottom-container {
-  grid-column: 1 / span 3;
-  background-color: #FF4C4F;
-  color: white;
-  font-size: 14px;
-  text-align: center;
-  padding: 10px;
+    grid-column: 1 / span 3;
+    background-color: #FF4C4F;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 10px;
+}
+
+.tab-bottom-container hr {
+    margin-bottom: 25px;
 }
