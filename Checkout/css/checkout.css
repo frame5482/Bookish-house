@@ -156,7 +156,9 @@ body.checkout-page {
 }
 
 #lineSpace {
+    width: 0.6%;
     height: auto;
+    padding: 0% 1%;
 }
 
 .login-register {
@@ -467,8 +469,9 @@ body.checkout-page {
     color: white;
     font-size: 14px;
     text-align: center;
-    padding-top: 100px;
-    padding-bottom: 10px;
+    padding-top: 5%;
+    padding-bottom: 1%;
+    margin-top: 8%;
 }
 
 .tab-bottom-container hr {
