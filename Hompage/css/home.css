@@ -423,13 +423,14 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
+    gap: 5px;
 }
 
 .book-img {
-    width: 312px;
-    height: 445px;
+    width: 50%;
+    aspect-ratio: 312/445; /*use for define the ratio between width and height ใช้กำหนดขนาดได้เวลาปรับจะได้ดูดีด้วย https://www.w3schools.com/cssref/css_pr_aspect-ratio.php*/
     object-fit: cover;
-    margin: 0 20px;
+    margin: 0 5%;
     transition: transform 0.3s ease;
 }
 
