@@ -46,7 +46,7 @@ function queryDB(sql, params = []) {
 //avatar upload setup
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
-      callback(null, 'img/Logo_Icon/');
+      callback(null, 'img/Book_Img/');
     },
 
     filename: (req, file, cb) => {
@@ -137,14 +137,14 @@ app.post('/regisDB', async (req, res) => {
             
             return res.send(`
                 <script>
-                    alert('บังอาจนัก! ชื่อ Username หรือ Email นี้มีผู้ครอบครองแล้ว จงไปคิดนามใหม่ซะ!');
+                    alert(' ชื่อ Username หรือ Email นี้มีผู้ครอบครองแล้ว ');
                     window.history.back();
                 </script>
             `);
         }
 
         console.error("Error to Register", err);
-        return res.send("เกิดข้อผิดพลาดในพิธีกรรมการสมัคร!");
+        return res.send("เกิดข้อผิดพลาดในการสมัคร!");
     }
 });
 
@@ -154,8 +154,8 @@ app.post('/regisSeller', async (req, res) => {
 
         let sql = `CREATE TABLE IF NOT EXISTS Seller (
             Seller_ID VARCHAR(15) NOT NULL,
-            Seller_Name VARCHAR(100) UNIQUE,    /* 🔥 ห้ามชื่อร้านซ้ำ! */
-            Seller_Email VARCHAR(100) UNIQUE,   /* 🔥 ห้ามอีเมลซ้ำ! */
+            Seller_Name VARCHAR(100) UNIQUE,   
+            Seller_Email VARCHAR(100) UNIQUE,   
             Seller_Password VARCHAR(100),
             Seller_img VARCHAR(100),
             Seller_Birthday DATE,
@@ -179,19 +179,16 @@ app.post('/regisSeller', async (req, res) => {
         
         result = await queryDB(sql);
 
-        // ✨ หากสำเร็จ: ส่งไปยังหน้าเข้าสู่ระบบทันที
         console.log("กำเนิด Seller ใหม่สำเร็จ: " + req.body.username);
         return res.redirect('/Login/login.html');
 
     } catch (error) {
-        //  ดักจับปีศาจชื่อซ้ำ (Duplicate Entry)
         if (error.code === 'ER_DUP_ENTRY') {
             console.warn("มีการพยายามใช้นามผู้ค้าซ้ำ:", error.sqlMessage);
             
-            // ส่งเวทย์มนตร์แจ้งเตือน แล้วถีบกลับไปหน้าเดิม
             return res.send(`
                 <script>
-                    alert('ช้าก่อน! ชื่อร้านค้าหรืออีเมลนี้มีผู้จับจองแล้ว จงตั้งนามใหม่เสียเถิด!');
+                    alert('ช้าก่อน! ชื่อร้านค้าหรืออีเมลนี้มีผู้จับจองแล้ว');
                     window.history.back();
                 </script>
             `);
@@ -209,12 +206,11 @@ app.post('/checkLogin', async (req, res) => {
     try {
         const { username, password } = req.body;
 
-        // ล้างทุกคุกกี้ทุกครั้งที่ล็อกอิน
         res.clearCookie('Seller_ID');
         res.clearCookie('User_ID');
         res.clearCookie('img');
 
-        // ตรวจ USER ก่อน
+        // ตรวจ USER 
         let sql = `SELECT * FROM User WHERE User_Name = ?`;
         let result = await queryDB(sql, [username]);
 
@@ -234,7 +230,7 @@ app.post('/checkLogin', async (req, res) => {
             return res.redirect('/Login/login.html');
         }
 
-        // ตรวจ SELLER ต่อ
+        // ตรวจ SELLER 
         sql = `SELECT * FROM Seller WHERE Seller_Name = ?`;
         result = await queryDB(sql, [username]);
 
@@ -272,7 +268,7 @@ app.get('/logout', (req,res) => {
 
 app.post('/addBook', upload.single("book_img"), async (req, res) => {
     try {
-        
+
         let filename = req.file ? req.file.filename : "";
         let name = req.body.name || "";
         let Seller_ID = req.body.Seller_ID || "";
@@ -362,6 +358,18 @@ app.post('/addBook', upload.single("book_img"), async (req, res) => {
     }
 })
 
+
+
+app.get('/getBooks', async (req, res) => {
+    try {
+        const sql = `SELECT * FROM Book`;
+        const books = await queryDB(sql);
+        res.json(books);
+    } catch (err) {
+        console.error("Error fetching books:", err);
+        res.status(500).json({ message: "ไม่สามารถดึงข้อมูลหนังสือได้" });
+    }
+});
 
  app.listen(port, hostname, () => {
         console.log(`Server running at   http://${hostname}:${port}/Login/login.html`);

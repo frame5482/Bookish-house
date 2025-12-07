@@ -10,18 +10,5 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         console.error("");
     }
-
-    const registerSellerLink = document.getElementById('go-registerSeller');
-    
-    if (registerSellerLink) {
-        registerSellerLink.addEventListener('click', function(event) {
-            event.preventDefault(); 
-            window.location.href = '../Register/RegisterSeller.html'; 
-        });
-    } else {
-        console.error("");
-    }
-
-
 });
 

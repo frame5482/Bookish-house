@@ -440,7 +440,7 @@ body {
 
 .book-img {
     width: 50%;
-    aspect-ratio: 312/445; /*use for define the ratio between width and height ใช้กำหนดขนาดได้เวลาปรับจะได้ดูดีด้วย https://www.w3schools.com/cssref/css_pr_aspect-ratio.php*/
+    aspect-ratio: 312/445; 
     object-fit: cover;
     margin: 0 5%;
     transition: transform 0.3s ease;
@@ -611,7 +611,12 @@ body {
   padding: 5px;
   font-size: 14px;
 }
-
+.book-quantity {
+  text-align: left;
+  padding: 5px;
+  font-size: 14px;
+  color: #555;
+}
 .add-basket {
   background-color: #ff7b7d;
   color: white;

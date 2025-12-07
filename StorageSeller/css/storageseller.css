@@ -219,12 +219,17 @@ body {
     justify-content: flex-end;
     background-color: #FF4C4F;
     border-radius: 5px;
-    padding: 10px;
+    padding: 1px;
+     position: absolute;
+    top: -4%;        
+    left: 0;      
+    width: 100%; 
 }
 
 #quickview-close {
     width: 2%;
     height: auto;
+    
 }
 
 .quickview-content {
@@ -449,6 +454,31 @@ body {
 .tab-bottom-container hr {
     margin-bottom: 25px;
 }
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff4c4f79;
+    display: none;
+    /*none = close overlay and block to open*/
+    z-index: 100;
+    /*what z-index can do? = use to make text or image infront or behind ไว้หน้าหลังจัดลำดับได้ https://www.w3schools.com/cssref/pr_pos_z-index.php*/
+}
+#side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: #FF4C4F;
+    color: white;
+    display: none;
+    /*none = close overlay and block to open*/
+    z-index: 100;
+}
+
 
 @media (max-width: 1024px) {
 
