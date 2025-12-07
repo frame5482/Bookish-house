@@ -174,20 +174,20 @@ body {
 }
 
 
-.register-container {
+.profile-container {
   grid-column: 1 / span 3;
   padding-top: 50px;
   padding-bottom: 100px;
-  margin-left: 650px;
-  margin-right: 650px;
+  margin-left: 400px;
+  margin-right: 400px;
   text-align: center;
 }
 
-.register-container > div{
+.profile-container > div{
     text-align: center;
 }
 
-#regisHead{
+#profileHead{
   grid-column: 1 / span 3;
   text-align: center;
   font-weight: bold;
@@ -195,26 +195,65 @@ body {
   font-size: 25px;
 }
 
-#regis-box{
-  grid-column: 2 / span 1;
+#profile-box{
+  display: grid;
+  grid-template-columns: 30% 70%;
   background-color: #9797974f;
-  border-radius: 10px;
-  padding-top: 40px;
-  padding-bottom: 40px;
+  border-radius: 1%;
+  padding: 40px 20px;
 }
 
+#profile-left{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+  gap: 20px;
+}
 
-.userRegis{
+#profilepage{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 150px;
+}
+
+#profile-right{
+  display: flex;
+  flex-direction: column;
+}
+
+.add-profile{
+  background-color: #ff7b7d;
+  color: white;
+  font-family: Noto Sans Thai;
+  font-size: 24px;
+  border-radius: 5px;
+  border: white;
+  padding: 10px 40px;
+  margin-top: 20px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.add-profile:hover{
+  cursor: pointer;
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.add-profile:active{
+  opacity: 1;
+}
+
+#profile-right{
+  display: flex;
+}
+
+.userProfile{
   text-align: left;
   margin-left: 20px;
   margin-top: 10px;
   font-size: 18px;
-}
-
-.userRegis::after{
-  content:"*";
-  color: red;
-  font-weight: bold;
 }
 
 .inputuser{
@@ -227,7 +266,7 @@ body {
   font-size: 16px;
 }
 
-.register-button{
+.profile-save{
   background-color: #ff7b7d;
   color: white;
   font-family: Noto Sans Thai;
@@ -235,37 +274,19 @@ body {
   border-radius: 5px;
   border: white;
   padding: 10px 40px;
-  margin-top: 20px;
+  margin-top: 25%;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-.register-button:hover{
+.profile-save:hover{
   cursor: pointer;
   opacity: 0.5;
   transform: scale(0.98);
 }
 
-.register-button:active{
+.profile-save:active{
   opacity: 1;
 }
-
-.login-text{
-  text-align: center;
-  margin-top: 5px;
-}
-
-.login-text a {
-  text-decoration: none;
-  color: #00BBFF;
-  font-weight: bold;
-  transition: opacity 0.3s ease;
-}
-
-.login-text a:hover {
-  text-decoration: underline;
-  opacity: 0.5;
-}
-
 
 .tab-bottom-container{
   grid-column: 1 / span 3;

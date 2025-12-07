@@ -94,11 +94,7 @@ document.querySelectorAll('.book').forEach(slider => {
     e.preventDefault(); // ป้องกัน text selection
   });
 
-  slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.classList.remove('active');
-  });
-
+  
   slider.addEventListener('mouseup', () => {
     isDown = false;
     slider.classList.remove('active');

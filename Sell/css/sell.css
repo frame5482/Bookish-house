@@ -1,0 +1,397 @@
+/* ================== Base ================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body.sell-page {
+  font-family: "Noto Sans Thai", sans-serif;
+  background-color: #f3f4f8;
+  color: #333;
+}
+
+/* ================== Layout ================== */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  align-items: start;
+}
+
+.grid-container > div {
+  text-align: center;
+}
+
+.nav-container {
+  grid-column: 1 / span 3;
+}
+
+/* ================== NAV TOP (คล้าย home) ================== */
+
+.nav-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FF4C4F;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 10px;
+}
+
+/* ซ้าย: เมนู + โลโก้ */
+.top-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+#tab-search {
+  width: 6%;
+  height: auto;
+  margin-left: 15px;
+}
+
+#logo {
+  width: 10%;
+  height: auto;
+}
+
+/* คลิกได้ */
+.click-img {
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.click-img:hover {
+  opacity: 0.7;
+  transform: scale(1.05);
+}
+
+.click-img:active {
+  opacity: 0.4;
+  transform: scale(0.95);
+}
+
+/* กลาง: search box สีดำ */
+.top-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+#search{
+  text-align: left;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+  background-color: #A13F3F;
+  width: 200px;
+  color: white;
+  font-size: 18px;
+  border: white;
+  font-family: Noto Sans Thai;
+}
+
+.search-box{
+  width: 260px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  background-color: #A13F3F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#searchimg{
+    width: 8%;
+    height: auto;
+}
+
+#search::placeholder {
+    color: #e0e0e0;
+}
+
+/* ขวา: basket + เส้น + profile + login/register */
+.top-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    text-align: right;
+}
+
+#basket,
+#profile {
+    width: 4%;
+    height: auto;
+}
+
+#lineSpace {
+    height: auto;
+}
+
+.login-register {
+    text-align: right;
+    margin-right: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.login-register:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    transform: scale(1.05);
+}
+
+.login-register:active {
+    transform: scale(0.95);
+}
+
+
+/* ================== NAV BOTTOM ================== */
+
+.nav-bottom {
+  grid-column: 1 / span 3;
+  background-color: #9797974f;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 5px #5c5c5c7a;
+}
+
+.nav-bottom a {
+  text-decoration: none;
+  color: #000000;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.nav-bottom a:hover {
+  opacity: 0.5;
+  transform: scale(1.05);
+}
+
+.nav-bottom a:active {
+  transform: scale(0.95);
+}
+
+.tag-book {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+/* ================== SELL CONTENT ================== */
+
+.sell-container {
+  grid-column: 1 / span 3;
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 100px;
+  text-align: left;
+  font-size: 16px;
+}
+
+.sell-title {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+/* กล่องเทาใหญ่ */
+.sell-card {
+  background-color: #e3e4eb;
+  border-radius: 10px;
+  padding: 15px 10px 25px;
+}
+
+/* layout ซ้าย-ขวา ในกล่อง */
+.sell-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 2fr;
+  grid-gap: 15px;
+}
+
+/* ---------- ซ้าย: ส่วนรูปภาพ ---------- */
+
+.image-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-preview {
+  width: 260px;
+  height: 330px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+  border: 1px solid #d0d0d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  overflow: hidden;
+}
+
+.image-placeholder-icon {
+  font-size: 36px;
+  opacity: 0.4;
+}
+
+/* ถ้า JS เปลี่ยนเป็นรูปจริง ให้ใส่ background-image ที่ div นี้ */
+.image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-upload-btn {
+  background-color: #ff7b7d;
+  color: white;
+  font-family: "Noto Sans Thai", sans-serif;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  padding: 7px 25px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.image-upload-btn:hover {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+/* ---------- ขวา: ฟอร์มข้อมูล ---------- */
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-inner {
+  background-color: #d4d4d4;
+  border-radius: 15px;
+  padding: 15px 20px 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+/* แถวรายละเอียดใช้หลายบรรทัด */
+.form-row-full {
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+.form-row label {
+  font-weight: bold;
+  min-width: 140px;
+}
+
+/* อิงสไตล์เหมือนการ์ดในรูป (พื้นเทา, ขอบโค้ง) */
+.text-input {
+  flex: 1;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  font-family: "Noto Sans Thai", sans-serif;
+  font-size: 14px;
+  background-color: #f7f7f7;
+}
+
+.text-input:focus {
+  outline: 2px solid #ff7b7d;
+}
+
+.select-input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* หน่วย "บาท" เล็กๆ ข้างๆช่องราคา */
+.inline-unit {
+  margin-left: 6px;
+  font-size: 14px;
+}
+
+/* textarea */
+.textarea-input {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ปุ่มเพิ่มสินค้า */
+.form-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.submit-btn {
+  background-color: #ff7b7d;
+  color: white;
+  font-family: "Noto Sans Thai", sans-serif;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+  padding: 8px 30px;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  opacity: 0.85;
+  transform: scale(0.98);
+}
+
+/* ================== Bottom line ================== */
+
+.tab-bottom-container {
+  grid-column: 1 / span 3;
+  background-color: #FF4C4F;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  padding-top: 100px;
+  padding-bottom: 10px;
+}
+
+.tab-bottom-container hr {
+  margin-bottom: 25px;
+}
+
+/* ================== Responsive ================== */
+
+@media (max-width: 900px) {
+  .sell-container {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .sell-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .tag-book {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
