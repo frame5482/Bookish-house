@@ -41,6 +41,21 @@ body {
     height: auto;
 }
 
+.search-box{
+  width: 260px;
+  padding: 5px 5px;
+  border-radius: 15px;
+  background-color: #A13F3F;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#searchimg{
+    width: 8%;
+    height: auto;
+}
+
 #search{
   text-align: left;
   padding-left: 25px;

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link type="text/css" rel="stylesheet" href="css/checkout.css">
+    <script type="text/javascript" src="js/main.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+  </head>
+  <body class="checkout-page">
+    <div class="grid-container">
+
+      <!-- ---------- NAV เหมือน home ---------- -->
+      <div class="nav-container">
+        <div class="nav-top">
+          <div class="top-left">
+            <img id="tab-search" src="../img/Logo_Icon/Tab.png" class="click-img" alt="menu">
+            <img id="logo" src="../img/Logo_Icon/Logo.png" alt="logo">
+          </div>
+
+          <div class="top-right">
+            <div class="search-box">
+              <img id="searchimg" src="../img/Logo_Icon/search.png">
+              <input id="search" type="text" placeholder="ค้นหา">
+            </div>
+            <img id="basket" src="../img/Logo_Icon/basket.png" class="click-img" alt="basket">
+            <img id="lineSpace" src="../img/Logo_Icon/LineSpace.png" alt="line">
+            <img id="profile" src="../img/Logo_Icon/avatar.png" class="click-img" alt="profile">
+            <a class="login-register" href="#">LOGIN/REGISTER</a>
+          </div>
+        </div>
+
+        <div class="nav-bottom">
+          <a class="tag-book" href="#">มังงะ</a>
+          <a class="tag-book" href="#">นิยาย</a>
+          <a class="tag-book" href="#">หนังสือปรัญชา</a>
+          <a class="tag-book" href="#">หนังสือพระ</a>
+        </div>
+      </div>
+
+      <!-- ---------- เนื้อหา checkout ---------- -->
+      <div class="checkout-container">
+        <h1 class="checkout-title">ชำระสินค้า</h1>
+
+        <div class="checkout-layout">
+          <!-- ซ้าย: รายการสินค้า -->
+          <section class="checkout-left">
+            <div class="checkout-left-inner">
+              <div class="checkout-left-header">
+                <h2>รายการสินค้า</h2>
+                <button class="add-item-btn" id="btnAddItem">เพิ่มรายการ</button>
+              </div>
+
+              <!-- ตอนนี้ยังไม่ต้องมีสินค้า ให้ JS/Backend มาเติมทีหลัง -->
+              <div id="cart-list">
+                <div class="cart-empty">ยังไม่มีสินค้าในรถเข็น</div>
+              </div>
+            </div>
+          </section>
+
+          <!-- ขวา: ยอดรวมรายการ -->
+          <aside class="checkout-right">
+            <div class="summary-card">
+              <h2 class="summary-title">ยอดรวมรายการ</h2>
+
+              <div class="summary-row">
+                <span>ราคารวม</span>
+                <span><span id="total-price"></span> <span class="summary-unit">บาท</span></span>
+              </div>
+              <div class="summary-row">
+                <span>ค่าจัดส่ง</span>
+                <span><span id="shipping-fee"></span> <span class="summary-unit">บาท</span></span>
+              </div>
+              <div class="summary-row">
+                <span>ภาษี</span>
+                <span><span id="tax-amount"></span> <span class="summary-unit">บาท</span></span>
+              </div>
+              <div class="summary-row">
+                <span>ส่วนลด</span>
+                <span><span id="discount-amount"></span> <span class="summary-unit">บาท</span></span>
+              </div>
+              <div class="summary-row">
+                <span>วันที่ชำระเงิน</span>
+                <span id="payment-date"></span>
+              </div>
+
+              <hr class="summary-divider">
+
+              <h2 class="summary-title pay-title">วิธีการชำระเงิน</h2>
+              <div class="payment-row">
+                <button class="select-method-btn" id="btnSelectPayment">เลือก</button>
+              </div>
+
+              <div class="pay-button-row">
+                <button class="pay-btn" id="btnPay">
+                  ชำระเงิน
+                  <img class="pay-cart-icon" src="../img/Logo_Icon/basket.png" alt="pay">
+                </button>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- เส้นล่าง + ข้อความ (แทน footer) ---------- -->
+    <div class="tab-bottom-container">
+      <hr>
+      <p>©BookishHouse Co.,Ltd. All rights Reserved.</p>
+    </div>
+  </body>
+</html>

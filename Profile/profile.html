@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Login</title>
-		<link type="text/css" rel="stylesheet" href="css/register.css">
+		<link type="text/css" rel="stylesheet" href="css/profile.css">
 		<script type="text/javascript" src="js/main.js"></script>
 		<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
 	</head>
@@ -35,35 +35,34 @@
         </div>
       </div>
     
-      <div class="register-container">
-        <legend id="regisHead">สมัครสมาชิก</legend>
-        <div id=regis-box>
-          <form class="form" action="/regisDB" method="post" accept-charset="utf-8">
-            <div class="userRegis">
+      <div class="profile-container">
+        <legend id="profileHead">ข้อมูลผู้ใช้</legend>
+        <div id=profile-box>
+        <div id="profile-left">
+          <img id="profilepage" src="../img/Book_Img/A Little History of Philosophy.png">
+          <input class="add-profile" type="submit" value="เพิ่มรูป">
+        </div>
+        <div id="profile-right">
+          <form class="form" action="" method="post" accept-charset="utf-8">
+            <div class="userProfile">
               ชื่อผู้ใช้งาน
             </div>
             <input class="inputuser" type="text" name="username" value="" placeholder="" required><br>
-            <div class="userRegis">
+            <div class="userProfile">
               อีเมล
             </div>
             <input class="inputuser" type="email" name="email" value="" placeholder="" required><br>
-            <div class="userRegis">
-              รหัสผ่าน
-            </div>
-            <input class="inputuser" type="password" name="password" value="" placeholder="" required><br>
-            <div class="userRegis">
-              ยืนยันรหัสผ่าน
-            </div>
-            <input class="inputuser" type="repassword" name="repassword" value="" placeholder="" required><br>
-            <div class="userRegis">
+            <div class="userProfile">
               วัน/เดือน/ปีเกิด
             </div>
             <input class="inputuser" type="date" name="date" value="" placeholder="" required><br>
-            <input class="register-button" type="submit" value="Register">
-            <div class="login-text">
-              หากเป็นสมาชิกอยู่แล้ว <a href="#">สมัครสมาชิก</a> <br>
+            <div class="userProfile">
+              ที่อยู่สำหรับจัดส่ง
             </div>
+            <input class="inputuser" type="text" name="address" value="" placeholder="" required><br>
+            <input class="profile-save" type="submit" value="บันทึก">
           </form>
+        </div>
         </div>
       </div>
     
