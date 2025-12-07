@@ -33,7 +33,7 @@ function renderBooks(data) {
             // --- ส่วนรูปภาพ ---
             const img = document.createElement('img');
             img.className = 'book-img';
-            img.src = '../img/Book_Img/' + book.Book_Img; // ตรวจสอบ path รูปให้ดีนะขอรับ
+            img.src = '../img/Book_Img/' + book.Book_Img; 
             img.alt = book.Book_Name;
             
             // *** จุดเชื่อมต่อ Quick View ***

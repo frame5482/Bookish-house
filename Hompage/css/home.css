@@ -428,15 +428,25 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
+    gap: 5px;
 }
 
 .book-img {
-    width: 312px;
-    height: 445px;
+    width: 50%;
+    aspect-ratio: 312/445; 
     object-fit: cover;
-    margin: 0 20px;
+    margin: 0 5%;
     transition: transform 0.3s ease;
 }
+
+.book-imgf {
+    width: 100%;
+    aspect-ratio: 312/445; 
+    object-fit: cover;
+    margin: 0% 5%;
+    transition: transform 0.3s ease;
+}
+
 
 .slide-button {
     background: none;
