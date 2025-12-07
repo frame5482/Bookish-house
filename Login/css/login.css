@@ -86,7 +86,7 @@ body {
   background-color: #FF4C4F;
   border-radius: 5px;
   padding: 10px;
-  margin: 5px 10px;
+  margin: 0.25% 0.5%;
 }
 
 .top-left{
@@ -144,8 +144,8 @@ body {
     gap: 10px;
     display: flex;
     justify-content: center;
-    margin-right: 10px;
-    margin-left: 10px;
+    margin-right: 0.5%;
+    margin-left: 0.5%;
     margin-top: 5px;
     padding: 10px;
     border-radius: 5px;
@@ -172,8 +172,7 @@ body {
   grid-column: 1 / span 3;
   padding-top: 100px;
   padding-bottom: 175px;
-  margin-left: 550px;
-  margin-right: 550px;
+  margin: 0% 40%;
   text-align: center;
 }
 
@@ -244,6 +243,7 @@ body {
   border-radius: 5px;
   border: white;
   padding: 10px 40px;
+  margin-top: 5%;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
