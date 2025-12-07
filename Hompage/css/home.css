@@ -434,11 +434,7 @@ body {
 
 .book-img {
     width: 50%;
-<<<<<<< HEAD
     aspect-ratio: 312/445; /*use for define the ratio between width and height ใช้กำหนดขนาดได้เวลาปรับจะได้ดูดีด้วย https://www.w3schools.com/cssref/css_pr_aspect-ratio.php*/
-=======
-    aspect-ratio: 312/445; 
->>>>>>> origin/Backend
     object-fit: cover;
     margin: 0 5%;
     transition: transform 0.3s ease;
@@ -624,7 +620,6 @@ body {
 
 .add-basket:hover { opacity: 0.7; transform: scale(1.02); }
 
-/* =================== Slide Buttons =================== */
 .slide-button {
   background: none;
   border: none;
@@ -637,9 +632,7 @@ body {
 .slide-button:hover { opacity: 0.6; transform: scale(1.05); }
 .slide-button:active { transform: scale(0.95); }
 
-/* =================== Footer =================== */
 .tab-bottom-container {
-<<<<<<< HEAD
     grid-column: 1 / span 3;
     background-color: #FF4C4F;
     color: white;
@@ -664,12 +657,3 @@ body {
 @media (max-width: 480px) {
 
 }
-=======
-  grid-column: 1 / span 3;
-  background-color: #FF4C4F;
-  color: white;
-  font-size: 14px;
-  text-align: center;
-  padding: 10px;
-}
->>>>>>> origin/Backend
