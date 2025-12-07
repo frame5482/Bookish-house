@@ -31,7 +31,13 @@ body {
     height: auto;
 }
 
-#profile,#basket{
+#profile{
+  width: 4%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+#basket{
     width: 4%;
     height: auto;
 }
@@ -179,8 +185,7 @@ body {
   grid-column: 1 / span 3;
   padding-top: 50px;
   padding-bottom: 100px;
-  margin-left: 400px;
-  margin-right: 400px;
+  margin: 0% 25%;
   text-align: center;
 }
 
@@ -213,15 +218,16 @@ body {
 }
 
 #profilepage{
-  width: 250px;
-  height: 250px;
+  width: 75%;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: 150px;
+  border-radius: 50%;
 }
 
 #profile-right{
   display: flex;
   flex-direction: column;
+  margin: 0% 5%;
 }
 
 .add-profile{

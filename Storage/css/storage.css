@@ -32,7 +32,13 @@ body {
     height: auto;
 }
 
-#profile,#basket {
+#profile{
+  width: 4%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+#basket{
     width: 4%;
     height: auto;
 }
