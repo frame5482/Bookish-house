@@ -40,7 +40,7 @@ body.sell-page {
   background-color: #FF4C4F;
   border-radius: 5px;
   padding: 10px;
-  margin: 5px 10px;
+  margin: 0.25% 0.5%;
 }
 
 /* ซ้าย: เมนู + โลโก้ */
@@ -165,8 +165,8 @@ body.sell-page {
   gap: 10px;
   display: flex;
   justify-content: center;
-  margin-right: 10px;
-  margin-left: 10px;
+  margin-right: 0.5%;
+  margin-left: 0.5%;
   margin-top: 5px;
   padding: 10px;
   border-radius: 5px;
