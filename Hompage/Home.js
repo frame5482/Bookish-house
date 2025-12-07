@@ -75,6 +75,8 @@ function renderBooks(data) {
 
 
 
+
+
 // =========================================
 // 3. ส่วนจัดการ Quick View (Popup)
 // =========================================
@@ -87,9 +89,9 @@ const qvImg = document.querySelector('.quickview-img');
 const qvTitle = document.getElementById('quickview-title');
 const qvPrice = document.getElementById('quickview-price');
 const qvDetail = document.getElementById('quickview-detail');
+const qvquantity = document.getElementById('quickview-quantity');
 const qvQuantityDisplay = document.getElementById('add-quantity');
 let currentQuantity = 1;
-
 
 // ฟังก์ชันเปิด Quick View
 function openQuickView(book) {
@@ -102,7 +104,7 @@ function openQuickView(book) {
     
     // ใส่รายละเอียด (ถ้าใน JSON ไม่มี key นี้ ข้าใส่ข้อความ default ให้)
     qvDetail.innerText = book.Description || "รายละเอียดเพิ่มเติมของหนังสือเล่มนี้ กำลังรอการบันทึกจากบรรณารักษ์...";
-
+    qvquantity.innerText = "คงเหลือ: " + (book.Book_Quantity || "ไม่ระบุ") + " เล่ม";
     // รีเซ็ตจำนวน
     currentQuantity = 1;
     if(qvQuantityDisplay) qvQuantityDisplay.innerText = 'x' + currentQuantity;
@@ -115,7 +117,6 @@ function openQuickView(book) {
     const overlayWrapper = document.querySelector('.overlay-container');
     if(overlayWrapper) overlayWrapper.style.display = 'block';
 }
-
 // ฟังก์ชันปิด Quick View
 function closeQuickView() {
     if(quickViewModal) quickViewModal.style.display = 'none';
@@ -154,6 +155,9 @@ if(qvBuyBtn) {
         closeQuickView();
     });
 }
+
+
+
 
 
 // =========================================
@@ -228,18 +232,21 @@ document.querySelectorAll('.book, .book-slide > div').forEach(slider => {
 
 const sideMenuWrapper = document.querySelector('.overlay-container');
 const bgOverlay = document.getElementById('overlay');
+const bgsidemenu = document.getElementById('side-menu');
 const tabBtn = document.getElementById('tab-search');
 
 // เปิดเมนู
 function openSideMenu() {
     if (sideMenuWrapper) sideMenuWrapper.style.display = 'block';
     if (bgOverlay) bgOverlay.style.display = 'block';
+    if (bgsidemenu) bgsidemenu.style.display = 'block';
 }
 
 // ปิดเมนู
 function closeSideMenu() {
     if (sideMenuWrapper) sideMenuWrapper.style.display = 'none';
     if (bgOverlay) bgOverlay.style.display = 'none';
+    if (bgsidemenu) bgsidemenu.style.display = 'none';  
 }
 
 // ผูกปุ่ม
