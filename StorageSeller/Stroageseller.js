@@ -1,20 +1,45 @@
+function checkCookie(){
+    if(getCookie("Seller_ID") == false && getCookie("User_Name") == false){
+        // ถ้าไม่มีทั้ง seller_id และ User_Name ให้เด้งไปหน้า login
+        // window.location = "login.html"; 
+    }
+}
+checkCookie();
+
+
 let bookData = [];
 // แทนที่จะ fetch จากไฟล์ JSON
-fetch('/getBooks')   // เรียก API ใหม่จาก Node.js
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+}
+fetch('/getBooks')
   .then(res => res.json())
   .then(data => {
-    bookData = data;
+    const sellerId = getCookie("Seller_ID"); // อ่าน Seller_ID จาก cookie
+    bookData = sellerId 
+        ? data.filter(book => book.Seller_ID === sellerId) 
+        : data; // ถ้าไม่มี cookie ก็เอาทุกเล่ม
     renderBooks(bookData);
   })
   .catch(err => console.error('โหลดข้อมูลจาก Server ล้มเหลว:', err));
-
   
+ document.querySelectorAll('.tag-book').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const selected = btn.dataset.category;   // เช่น "Manga"
+        const filtered = bookData.filter(book => book.Book_Category === selected);
+        renderBooks(filtered);
+    });
+});
+
+
 function renderBooks(data) {
    const container = document.getElementById('Book-container');
     if(!container) return;
     container.innerHTML = '';
 
-    
     data.forEach(book => {
         const targetContainer = container;
         
