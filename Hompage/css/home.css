@@ -620,7 +620,6 @@ body {
 
 .add-basket:hover { opacity: 0.7; transform: scale(1.02); }
 
-/* =================== Slide Buttons =================== */
 .slide-button {
   background: none;
   border: none;
@@ -633,12 +632,28 @@ body {
 .slide-button:hover { opacity: 0.6; transform: scale(1.05); }
 .slide-button:active { transform: scale(0.95); }
 
-/* =================== Footer =================== */
 .tab-bottom-container {
-  grid-column: 1 / span 3;
-  background-color: #FF4C4F;
-  color: white;
-  font-size: 14px;
-  text-align: center;
-  padding: 10px;
+    grid-column: 1 / span 3;
+    background-color: #FF4C4F;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 0.5%;
+}
+
+.tab-bottom-container hr {
+    margin-bottom: 25px;
+}
+
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 480px) {
+
 }
