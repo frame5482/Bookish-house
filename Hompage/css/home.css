@@ -472,13 +472,75 @@ body {
 .tag-button:active {
     opacity: 1;
 }
-<<<<<<< HEAD
+
+.book-slide{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0px;
+  margin-bottom: 150px;
+}
+
+.book-famous{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+}
+
+.book-img{
+  width: 312px;
+  height: 445px;
+  object-fit: cover;
+  margin: 0 20px;
+  transition: transform 0.3s ease;
+}
+
+.slide-button{
+  background: none;
+  border: none;
+  font-size: 40px;
+  cursor: pointer;
+  color: black;
+  transition: opacity 0.3s ease, transform 0.2 ease;
+  margin: 0 100px;
+}
+
+.slide-button:hover{
+  opacity: 0.6;
+  transform: scale(1.05);
+}
+
+.slide-button:active{
+  transform: scale(0.95);
+}
+
+.tag-button{
+  background-color: #ff7b7d;
+  color: white;
+  font-family: Noto Sans Thai;
+  font-size: 16px;
+  border-radius: 5px;
+  border: white;
+  padding: 5px 20px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tag-button:hover{
+  cursor: pointer;
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+.tag-button:active{
+  opacity: 1;
+}
 .book-slide {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* เริ่มจากซ้าย */
-    padding: 0 50px; /* เว้นขอบให้ภาพไม่ติดขอบ */
-    overflow: visible; /* ให้ภาพยื่นออกมาได้ */
+    justify-content: flex-start; 
+    padding: 0 50px; 
+    overflow: visible; 
     position: relative;
 }
 
@@ -486,7 +548,7 @@ body {
 .book {
   
   display: flex;
-  gap: 150px;
+  gap: 30px;
    overflow-x: hidden; 
   scroll-behavior: smooth;
   padding: 10px 0;
@@ -563,58 +625,4 @@ body {
   font-size: 14px;
   text-align: center;
   padding: 10px;
-=======
-
-.book {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    justify-items: center;
-}
-
-.book-name {
-    text-align: left;
-    padding: 5px 50px;
-}
-
-.book-price {
-    text-align: left;
-    justify-content: left;
-    padding: 15px 50px;
-}
-
-.add-basket {
-    background-color: #ff7b7d;
-    color: white;
-    font-family: Noto Sans Thai;
-    font-size: 24px;
-    border-radius: 5px;
-    border: white;
-    padding: 10px 25px;
-    margin-bottom: 50px;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.add-basket:hover {
-    cursor: pointer;
-    opacity: 0.5;
-    transform: scale(0.98);
-}
-
-.add-basket:active {
-    opacity: 1;
-}
-
-.tab-bottom-container {
-    grid-column: 1 / span 3;
-    background-color: #FF4C4F;
-    color: white;
-    font-size: 14px;
-    text-align: center;
-    padding-top: 100px;
-    padding-bottom: 10px;
->>>>>>> origin/Jr
-}
-
-.tab-bottom-container hr {
-    margin-bottom: 25px;
 }

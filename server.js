@@ -79,12 +79,6 @@ app.post('/regisDB', async (req,res) => {
     return res.redirect('login.html');
 })
 
-
-
-
-
-
-
 app.post('/checkLogin',async (req,res) => {
   
 try {
@@ -123,7 +117,79 @@ app.get('/logout', (req,res) => {
     return res.redirect('login.html');
 })
 
+
+app.post('/addBook', async (req, res) => {
+    try {
+
+        let generatedBookID = "B" + Math.floor(10000 + Math.random() * 90000);
+
+        let sql = `CREATE TABLE IF NOT EXISTS Book (
+            Book_ID VARCHAR(10) NOT NULL,
+            Book_Price DECIMAL(10,2),
+            Book_Name VARCHAR(100),
+            Book_Img VARCHAR(100),
+            Book_Detail VARCHAR(1000),
+            Book_Tag VARCHAR(100),
+            Seller_ID VARCHAR(15) NOT NULL,
+            PRIMARY KEY (Book_ID),
+            FOREIGN KEY (Seller_ID) REFERENCES Seller(Seller_ID) ON DELETE CASCADE
+        )`;
+        await queryDB(sql);
+
+
+        sql = `INSERT INTO Book (
+            Book_ID, 
+            Book_Price, 
+            Book_Name, 
+            Book_Img, 
+            Book_Detail, 
+            Book_Tag, 
+            Seller_ID
+        ) VALUES (
+            "${generatedBookID}", 
+            ${req.body.price}, 
+            "${req.body.name}", 
+            "${req.body.img}",
+            "${req.body.detail}",
+            "${req.body.tag}",
+            "${req.body.seller_id}" 
+        )`;
+        
+        let result = await queryDB(sql);
+        res.send({ message: "done", bookID: generatedBookID });
+
+    } catch (error) {
+        console.error("fail:", error);
+        res.status(500).send("fail Seller_ID not found");
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  app.listen(port, hostname, () => {
         console.log(`Server running at   http://${hostname}:${port}/Login/login.html`);
         
 });
+
+
+
+
+
