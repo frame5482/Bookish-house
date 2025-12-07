@@ -34,72 +34,47 @@
           <a class="tag-book" href="#">หนังสือปรัญชา</a>
           <a class="tag-book" href="#">หนังสือพระ</a>
         </div>
+
         <div id="quickview-container">
-            <div class=quickview-top>
-                <img id="quickview-close" src="../img/Logo_Icon/close.png" class="click-img">
+          <div class=quickview-top>
+            <img id="quickview-close" src="../img/Logo_Icon/close.png" class="click-img">
+          </div>
+          <div class="quickview-content">
+            <div class="quickview-left">
+              <img class="quickview-img" src="../img/Book_Img/Alya-book-manga1.png">
             </div>
-            <div class="quickview-content">
-                <div class="quickview-left">
-                    <img class="quickview-img" src="../img/Book_Img/Alya-book-manga1.png">
-                </div>
-                <div class="quickview-right">
-                    <p id="quickview-title">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 1 (ฉบับการ์ตูน)</p>
-                    <p id="quickview-price">159.00 บาท</p>
-                    <p id="quickview-quantity">จำนวนสินค้าคงเหลือ : 15 เล่ม</p>
-                    <div class="up-downQuantity">
-                        <button class="add-button">-</button>
-                        <span id="add-quantity">x1</span>
-                        <button class="add-button">+</button>
-                    </div>
-                    <p class="quickview-detail" id="quickview-detail">คุณอาเรีย สาวสวยผมเงินที่นั่งโต๊ะข้างๆ
-                        บางครั้งจะพูดภาษารัสเซียออกมา ถึงเจ้าตัวจะบอกว่ากำลังด่าผมอยู่...แต่ความจริงแล้วไม่ใช่!
-                        ภาษารัสเซียที่เธอพูดเมื่อกี้คือ “สนใจฉันหน่อยสิ” ต่างหาก!
-                        ที่จริงแล้ว ทักษาการฟังภาษารัสเซียของผม คุเซะ มาซาจิกะ อยู่ในระดับเดียวกับเจ้าของภาษา
-                        และวันนี้ คุณอาเรียซึ่งไม่รู้เรื่องนั้นเลยสักนิดก็ยังคงพูดคำหวานเป็นภาษารัสเซียใส่ผม!
-                        มาเปิดม่านเลิฟคอเมดี้วัยใสกับสาวม.ปลายชาวรัสเซีย
-                        ผู้สวยเลอเลิศจนเป็นที่หมายปองของทั้งโรงเรียน
-                    </p>
-                    <hr><input class="quickview-button" type="submit" value="สั่งซื้อเลย">
-                </div>
+            <div class="quickview-right">
+              <p id="quickview-title"></p>
+              <p id="quickview-price"></p>
+              <p id="quickview-quantity"></p>
+              <div class="up-downQuantity">
+                <button class="add-button">-</button>
+                <span id="add-quantity">x1</span>
+                <button class="add-button">+</button>
+              </div>
+              <p class="quickview-detail" id="quickview-detail">
+              </p>
+              <hr><input class="quickview-button" type="submit" value="สั่งซื้อเลย">
             </div>
+          </div>
         </div>
       </div>
     
     <div class="storage-container">
         <div class="stroage-header">
             สินค้า
-        </div><br>
+
+    <button class="submit-btn" href="../Sell/Sell.html" >
+                 เพิ่มสินค้า
+     </button>
+                 
+        </div>
+        <br>
+        
         <div class="book-box">
             <div class="book-header">
-                มังงะ
-            </div><br>
-            <div class="book-row">
-                <div class="book">
-                    <img class="book-img" src="../img/Book_Img/Alya-book-manga1.png">
-                    <img class="book-img" src="">
-                    <img class="book-img" src="">
-                </div><br>
-                <div class="book">
-                    <div class="book-name">คุณอาเรียโต๊ะข้างๆพูดรัสเซียหวานใส่ซะหัวใจจะวาย เล่ม 1 (ฉบับการ์ตูน)</div>
-                    <div class="book-name"></div>
-                    <div class="book-name"></div>
-                </div>
-                <div class="book">
-                    <div class="book-price">จำนวนสินค้าคงเหลือ : 5</div>
-                    <div class="book-price">จำนวนสินค้าคงเหลือ : 10</div>
-                    <div class="book-price">จำนวนสินค้าคงเหลือ : 15 </div>
-                </div>
-                <div class="book">
-                    <div class="book-price">159.00 บาท</div>
-                    <div class="book-price">159.00 บาท</div>
-                    <div class="book-price">159.00 บาท</div>
-                </div>
-                <div class="book">
-                    <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-                    <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-                    <input class="add-basket" type="submit" value="เพิ่มลงในรถเข็น">
-                </div>
-            </div> <!--เพิ่ม book-raw เอานะถ้าจะเพิ่มแถว-->
+              <div id="Book-container" class="book"></div>
+            </div>
         </div>
     </div>
       <div class="tab-bottom-container">

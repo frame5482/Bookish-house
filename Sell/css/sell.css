@@ -134,7 +134,9 @@ body.sell-page {
 }
 
 #lineSpace {
+    width: 0.6%;
     height: auto;
+    padding: 0% 1%;
 }
 
 .login-register {
@@ -189,8 +191,7 @@ body.sell-page {
 }
 
 .tag-book {
-  padding-left: 100px;
-  padding-right: 100px;
+    padding: 0% 5%;
 }
 
 /* ================== SELL CONTENT ================== */
@@ -365,13 +366,13 @@ body.sell-page {
 /* ================== Bottom line ================== */
 
 .tab-bottom-container {
-  grid-column: 1 / span 3;
-  background-color: #FF4C4F;
-  color: white;
-  font-size: 14px;
-  text-align: center;
-  padding-top: 100px;
-  padding-bottom: 10px;
+    grid-column: 1 / span 3;
+    background-color: #FF4C4F;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    padding-top: 5%;
+    padding-bottom: 0.5%;
 }
 
 .tab-bottom-container hr {

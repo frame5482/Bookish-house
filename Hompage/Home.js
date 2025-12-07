@@ -1,20 +1,21 @@
 let bookData = [];
 
-fetch('../Bookstock.json')
+// แทนที่จะ fetch จากไฟล์ JSON
+fetch('/getBooks')   // เรียก API ใหม่จาก Node.js
   .then(res => res.json())
   .then(data => {
     bookData = data;
     renderBooks(bookData);
   })
-  .catch(err => console.error('โหลด JSON ล้มเหลว:', err));
+  .catch(err => console.error('โหลดข้อมูลจาก Server ล้มเหลว:', err));
 
-
+  
 function renderBooks(data) {
     const containers = {
         'Manga': document.getElementById('manga-container'),
         'Novel': document.getElementById('novel-container'),
-        'Philo': document.getElementById('Philosophy-container'),
-        'Monk':  document.getElementById('Buddhist-container'),
+        'Philosophy': document.getElementById('Philosophy-container'),
+        'Buddhist':  document.getElementById('Buddhist-container'),
         'Famous': document.getElementById('famous-container') 
     };
 
@@ -24,7 +25,7 @@ function renderBooks(data) {
     }
     data.forEach(book => {
         // เช็คว่าหนังสือเล่มนี้ควรอยู่กล่องไหน (ถ้าไม่มี Category ให้ลง Famous หรือจะแก้ Logic ตรงนี้ตามใจท่าน)
-        const targetContainer = containers[book.Category] || containers['Famous'];
+        const targetContainer = containers[book.Book_Category] || containers['Famous'];
         
         if (targetContainer) {
             const itemWrapper = document.createElement('div');

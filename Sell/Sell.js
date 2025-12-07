@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (response.ok) {
                     alert(`สำเร็จ! คัมภีร์หมายเลข ${result.bookID} ถูกจารึกแล้ว`);
-                    window.location.href = 'feed.html'; 
+                    window.location.href = '../StorageSeller/storageseller.html'; 
                 } else {
                     alert(`ล้มเหลว: ${result.message || 'เกิดข้อผิดพลาดบางอย่าง'}`);
                 }
