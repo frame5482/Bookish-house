@@ -406,7 +406,6 @@ app.post('/addToOrder', async (req, res) => {
                 Order_ID VARCHAR(20) NOT NULL,
                 Book_ID VARCHAR(10) NOT NULL,
                 Book_Total INT DEFAULT 1,
-                Book_Price DECIMAL(10,2),
                 Unit_Price DECIMAL(10,2),
                 FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID) ON DELETE CASCADE,
                 FOREIGN KEY (Book_ID) REFERENCES Book(Book_ID) ON DELETE CASCADE
@@ -441,9 +440,9 @@ app.post('/addToOrder', async (req, res) => {
         } else {
             // insert ใหม่
             await queryDB(`
-                INSERT INTO OrderDetail (Order_ID, Book_ID, Book_Total, Book_Price, Unit_Price)
-                VALUES (?, ?, ?, ?, ?)
-            `, [currentOrderID, bookID, quantity, pricePerUnit, pricePerUnit * quantity]);
+                INSERT INTO OrderDetail (Order_ID, Book_ID, Book_Total, Unit_Price)
+                VALUES (?, ?, ?, ?)
+            `, [currentOrderID, bookID, quantity, pricePerUnit * quantity]);
         }
 
         // อัปเดตราคารวม
@@ -491,8 +490,86 @@ app.get('/getOrderDetail', async (req, res) => {
         res.status(500).json({ message: "ไม่สามารถดึงรายการสั่งซื้อได้" });
     }
 });
+app.post('/removeFromOrder', async (req, res) => {
+    try {
+        const userID = req.cookies.User_ID;
+        const bookID = req.body.Book_ID;
+        const quantity = parseInt(req.body.Quantity) || 1;
 
+        if (!userID) {
+            return res.status(401).json({ message: "โปรดเข้าสู่ระบบก่อน" });
+        }
 
+        // หา order pending ของ user
+        const orderSql = `SELECT Order_ID FROM Orders WHERE User_ID = ? AND Status = 'Pending' LIMIT 1`;
+        const orders = await queryDB(orderSql, [userID]);
+        if (orders.length === 0) {
+            return res.status(400).json({ message: "ไม่พบ order ที่ค้างอยู่" });
+        }
+
+        const orderID = orders[0].Order_ID;
+
+        // ดึง Book_Total ปัจจุบัน
+        const detailSql = `SELECT Book_Total, Unit_Price FROM OrderDetail WHERE Order_ID = ? AND Book_ID = ?`;
+        const details = await queryDB(detailSql, [orderID, bookID]);
+        if (details.length === 0) {
+            return res.status(400).json({ message: "ไม่พบสินค้านี้ใน order" });
+        }
+
+        const currentTotal = details[0].Book_Total;
+        const unitPrice = details[0].Unit_Price / currentTotal;
+
+        if (quantity >= currentTotal) {
+            // ลบทั้งหมดถ้า remove มากกว่าหรือเท่ากับจำนวนที่มี
+            await queryDB(`DELETE FROM OrderDetail WHERE Order_ID = ? AND Book_ID = ?`, [orderID, bookID]);
+        } else {
+            // ลดจำนวนและอัปเดตราคา
+            const newTotal = currentTotal - quantity;
+            const newUnitPrice = unitPrice * newTotal;
+            await queryDB(`UPDATE OrderDetail SET Book_Total = ?, Unit_Price = ? WHERE Order_ID = ? AND Book_ID = ?`,
+                [newTotal, newUnitPrice, orderID, bookID]);
+        }
+
+        // อัปเดตราคารวม order ใหม่
+        const totalResult = await queryDB(`SELECT SUM(Unit_Price) AS Total FROM OrderDetail WHERE Order_ID = ?`, [orderID]);
+        const sumPrice = totalResult[0].Total || 0;
+        await queryDB(`UPDATE Orders SET Order_Price = ? WHERE Order_ID = ?`, [sumPrice, orderID]);
+
+        res.json({ message: "ลบสินค้าเรียบร้อย", newTotal: sumPrice });
+
+    } catch (err) {
+        console.error("🔥 RemoveFromOrder Error:", err);
+        res.status(500).json({ message: "เกิดข้อผิดพลาดในการลบสินค้า" });
+    }
+});
+
+app.post('/Checkout', async (req, res) => {
+    try {
+        const userID = req.cookies.User_ID;
+        if (!userID) return res.status(401).json({ message: 'โปรดเข้าสู่ระบบก่อน' });
+
+        // หา Order Pending ปัจจุบัน
+        const orderSql = `SELECT Order_ID FROM Orders WHERE User_ID = ? AND Status = 'Pending' LIMIT 1`;
+        const orders = await queryDB(orderSql, [userID]);
+
+        if (orders.length === 0) return res.status(400).json({ message: 'ไม่มีรายการสินค้า' });
+
+        const currentOrderID = orders[0].Order_ID;
+
+        // ทำเครื่องหมาย Order เป็น "Paid" หรือ "Completed"
+        await queryDB(`UPDATE Orders SET Status = 'Paid' WHERE Order_ID = ?`, [currentOrderID]);
+
+        // สร้าง Order ใหม่ สำหรับซื้อครั้งถัดไป
+        const newOrderID = "BH" + Math.floor(100000 + Math.random() * 900000);
+        await queryDB(`INSERT INTO Orders (Order_ID, User_ID) VALUES (?, ?)`, [newOrderID, userID]);
+
+        // คืนค่า Order ใหม่ให้ Frontend
+        res.json({ message: 'ชำระเงินเรียบร้อย', newOrderID });
+    } catch (err) {
+        console.error("Checkout Error:", err);
+        res.status(500).json({ message: 'เกิดข้อผิดพลาดขณะชำระเงิน' });
+    }
+});
 
 
  app.listen(port, hostname, () => {

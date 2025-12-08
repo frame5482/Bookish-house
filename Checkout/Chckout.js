@@ -58,22 +58,44 @@ function renderCart(items) {
         total += item.Unit_Price;
         wrapper.appendChild(priceDiv);
 
-        // ปุ่มลบ
-        const removeBtn = document.createElement('button');
-        removeBtn.className = 'remove-item-btn';
-        removeBtn.innerText = 'ลบ';
-        removeBtn.addEventListener('click', () => {
-            fetch('/removeFromOrder', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                credentials: 'same-origin',
-                body: JSON.stringify({ Book_ID: item.Book_ID })
-            })
-            .then(() => loadCart())  // โหลดใหม่หลังลบ
-            .catch(err => console.error('ลบสินค้าไม่สำเร็จ:', err));
-        });
-        wrapper.appendChild(removeBtn);
 
+// --- สร้าง wrapper สำหรับปุ่มลบ + input ---
+const removeWrapper = document.createElement('div');
+removeWrapper.className = 'remove-wrapper';
+
+// input ใส่จำนวนที่ต้องการลบ
+const inputQty = document.createElement('input');
+inputQty.type = 'number';
+inputQty.min = 1;
+inputQty.max = item.Book_Total;
+inputQty.value = 1;
+inputQty.style.width = '50px';
+inputQty.style.marginRight = '5px';
+
+// ปุ่มลบ
+const removeBtn = document.createElement('button');
+removeBtn.className = 'remove-item-btn';
+removeBtn.innerText = 'ลบ';
+removeBtn.addEventListener('click', () => {
+    const removeQty = parseInt(inputQty.value);
+    if (removeQty > 0 && removeQty <= item.Book_Total) {
+        fetch('/removeFromOrder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ Book_ID: item.Book_ID, Quantity: removeQty })
+        })
+        .then(() => loadCart())  // โหลดใหม่หลังลบ
+        .catch(err => console.error('ลบสินค้าไม่สำเร็จ:', err));
+    } else {
+        alert('จำนวนที่ลบไม่ถูกต้อง');
+    }
+});
+
+// รวม input + ปุ่มเข้าด้วยกัน
+removeWrapper.appendChild(inputQty);
+removeWrapper.appendChild(removeBtn);
+wrapper.appendChild(removeWrapper);
         cartList.appendChild(wrapper);
     });
 
@@ -82,7 +104,7 @@ function renderCart(items) {
 
 function updateSummary(total) {
     document.getElementById('total-price').innerText = total.toFixed(2);
-    document.getElementById('shipping-fee').innerText = (total * 0.05).toFixed(2);
+    document.getElementById('shipping-fee').innerText = (50).toFixed(2);
     document.getElementById('tax-amount').innerText = (total * 0.07).toFixed(2);
     document.getElementById('discount-amount').innerText = '0.00';
     document.getElementById('payment-date').innerText = new Date().toLocaleDateString();
@@ -90,3 +112,29 @@ function updateSummary(total) {
 
 // เรียกโหลดเมื่อ DOM โหลดเสร็จ
 window.addEventListener('DOMContentLoaded', () => loadCart());
+
+
+document.getElementById('btnPay').addEventListener('click', async () => {
+    try {
+        const confirmPay = confirm("คุณแน่ใจว่าจะชำระเงินใช่หรือไม่?");
+        if (!confirmPay) return;
+
+        const res = await fetch('/Checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin'
+        });
+
+        if (!res.ok) {
+            const text = await res.text();
+            alert("เกิดข้อผิดพลาด: " + text);
+            return;
+        }
+
+        alert("ชำระเงินเรียบร้อย! สร้าง Order ใหม่แล้ว");
+        loadCart(); // โหลด cart ใหม่ ให้ว่าง
+    } catch (err) {
+        console.error("Pay Error:", err);
+        alert("เกิดข้อผิดพลาด: " + err.message);
+    }
+});
