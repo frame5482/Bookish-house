@@ -195,6 +195,33 @@ body {
     /*what z-index can do? = use to make text or image infront or behind ไว้หน้าหลังจัดลำดับได้ https://www.w3schools.com/cssref/pr_pos_z-index.php*/
 }
 
+
+.tag-header {
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #F63336;
+    padding: 30px;
+}
+
+.tag-category {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    justify-items: center;
+    display: block;
+    margin: 15px 0px;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.tag-category:hover {
+    opacity: 0.5;
+    transform: scale(1.05);
+}
+
+.tag-category:active {
+    transform: scale(0.95);
+}
+
 #quickview-container {
     position: fixed;
     top: 50%;

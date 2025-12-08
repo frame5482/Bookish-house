@@ -66,6 +66,13 @@ fetch('/getBooks')
         renderBooks(filtered);
     });
 });
+document.querySelectorAll('.tag-category').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const selected = btn.dataset.tag;   
+        const filtered = bookData.filter(book => book.Book_Tag === selected);
+        renderBooks(filtered);
+    });
+});
 
 
 function renderBooks(data) {
