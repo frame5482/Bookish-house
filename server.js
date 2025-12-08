@@ -56,6 +56,16 @@ const storage = multer.diskStorage({
     }
   });
 
+  const storageprofile = multer.diskStorage({
+    destination: (req, file, callback) => {
+      callback(null, 'img/Profile_Img/');
+    },
+
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+  });
+
 const imageFilter = (req, file, cb) => {
     // Accept images only
     if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
@@ -66,9 +76,10 @@ const imageFilter = (req, file, cb) => {
 };
 
 const upload = multer({ storage: storage, fileFilter: imageFilter });
+const uploadprofile = multer({ storageprofile: storageprofile, fileFilter: imageFilter });
 
 
-app.post('/profilepic', upload.single("avatar"),async(req,res) => {
+app.post('/profilepic', uploadprofile.single("avatar"),async(req,res) => {
         try{
         const username = req.cookies.username;
         
@@ -103,6 +114,9 @@ const updateImg = async (username, filen) => {
 
 
 app.post('/regisDB', async (req, res) => {
+    const username = req.body.username;  
+    const email = req.body.email;
+
     try {
         let generatedID = "UID" + Math.floor(1000 + Math.random() * 9000);
 
@@ -116,6 +130,21 @@ app.post('/regisDB', async (req, res) => {
             PRIMARY KEY (User_ID)
         )`;
         await queryDB(sql);
+
+     // ตรวจสอบว่าชื่อซ้ำใน User
+        let existingUser = await queryDB(`SELECT * FROM User WHERE User_Name = ? OR User_Email = ? LIMIT 1`, [username, email]);
+        if (existingUser.length > 0) {
+            return res.send(`<script>alert('ชื่อผู้ใช้หรืออีเมลนี้ถูกใช้งานแล้ว'); window.history.back();</script>`);
+        }
+
+        // ตรวจสอบชื่อซ้ำกับ Seller
+        let existingSeller = await queryDB(`SELECT * FROM Seller WHERE Seller_Name = ? LIMIT 1`, [username]);
+        if (existingSeller.length > 0) {
+            return res.send(`<script>alert('ชื่อนี้มีผู้ค้าจองอยู่แล้ว'); window.history.back();</script>`);
+        }
+
+
+
 
         sql = `INSERT INTO User (
             User_ID, User_Name, User_Email, User_Password, User_Birthday
@@ -151,6 +180,8 @@ app.post('/regisDB', async (req, res) => {
 });
 
 app.post('/regisSeller', async (req, res) => {
+     const username = req.body.username;  
+    const email = req.body.email;
     try {
         let generatedID = "SE" + Math.floor(10000 + Math.random() * 90000);
 
@@ -164,6 +195,21 @@ app.post('/regisSeller', async (req, res) => {
             PRIMARY KEY (Seller_ID)
         )`;
         let result = await queryDB(sql);
+
+
+         // ตรวจสอบว่าชื่อซ้ำใน User
+        let existingUser = await queryDB(`SELECT * FROM User WHERE User_Name = ? OR User_Email = ? LIMIT 1`, [username, email]);
+        if (existingUser.length > 0) {
+            return res.send(`<script>alert('ชื่อผู้ใช้หรืออีเมลนี้ถูกใช้งานแล้ว'); window.history.back();</script>`);
+        }
+
+        // ตรวจสอบชื่อซ้ำกับ Seller
+        let existingSeller = await queryDB(`SELECT * FROM Seller WHERE Seller_Name = ? LIMIT 1`, [username]);
+        if (existingSeller.length > 0) {
+            return res.send(`<script>alert('ชื่อนี้มีผู้ค้าจองอยู่แล้ว'); window.history.back();</script>`);
+        }
+
+
 
         sql = `INSERT INTO Seller (
             Seller_ID, 
@@ -245,7 +291,7 @@ app.post('/checkLogin', async (req, res) => {
                 res.cookie('Seller_ID', s.Seller_ID);
                 res.cookie('img', s.Seller_img);
 
-                return res.redirect('Sell/Sell.html');
+                return res.redirect('StorageSeller/storageseller.html');
             }
 
             console.log("Login fail: Wrong Password (Seller)");
@@ -276,7 +322,7 @@ app.post('/addBook', upload.single("book_img"), async (req, res) => {
         let Seller_ID = req.body.Seller_ID || "";
         let price = parseFloat(req.body.price) || 0; 
         
-        console.log("📦 กำลังรับข้อมูล:", req.body); // ดู Log ว่าค่าส่งมาครบไหม
+        console.log(" กำลังรับข้อมูล:", req.body); // ดู Log ว่าค่าส่งมาครบไหม
 
         // สร้างตาราง (ถ้ายังไม่มี)
         let createTableSql = `CREATE TABLE IF NOT EXISTS Book (
@@ -383,9 +429,15 @@ app.post('/addToOrder', async (req, res) => {
         }
 
         // ดึงราคาหนังสือ
-        let bookSql = `SELECT Book_Price FROM Book WHERE Book_ID = ?`;
+        let bookSql = `SELECT Book_Price, Book_Quantity 
+               FROM Book 
+               WHERE Book_ID = ? 
+               FOR UPDATE`;
         let bookResult = await queryDB(bookSql, [bookID]);
         if(bookResult.length === 0) return res.send(`<script>alert('ไม่พบหนังสือเล่มนี้'); window.history.back();</script>`);
+        if (bookResult[0].Book_Quantity <= 0 || bookResult[0].Book_Quantity < quantity) {
+             return res.send(`<script>alert('จำนวนหนังสือไม่เพียงพอแล้ว'); window.history.back();</script>`);
+}
 
         let pricePerUnit = bookResult[0].Book_Price;
 
@@ -444,13 +496,15 @@ app.post('/addToOrder', async (req, res) => {
                 VALUES (?, ?, ?, ?)
             `, [currentOrderID, bookID, quantity, pricePerUnit * quantity]);
         }
+        await queryDB(`UPDATE Book SET Book_Quantity = Book_Quantity - ? WHERE Book_ID = ?`, [quantity, bookID]);
+
 
         // อัปเดตราคารวม
         let total = await queryDB(`SELECT SUM(Unit_Price) AS Total FROM OrderDetail WHERE Order_ID = ?`, [currentOrderID]);
         let sumPrice = total[0].Total || 0;
         await queryDB(`UPDATE Orders SET Order_Price = ? WHERE Order_ID = ?`, [sumPrice, currentOrderID]);
 
-        return res.redirect('/order.html?orderid=' + currentOrderID);
+        return res.redirect('/Hompage/Home.html');
 
     } catch(err) {
         console.error("🔥 AddToOrder Error:", err);

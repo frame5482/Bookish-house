@@ -182,6 +182,192 @@ body {
     padding: 0% 5%;
 }
 
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff4c4f79;
+    display: none;
+    /*none = close overlay and block to open*/
+    z-index: 100;
+    /*what z-index can do? = use to make text or image infront or behind ไว้หน้าหลังจัดลำดับได้ https://www.w3schools.com/cssref/pr_pos_z-index.php*/
+}
+
+#quickview-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 1250px;
+    max-width: 90vw;
+    background: white;
+    color: white;
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+    display: none;
+    /*none = close overlay and block to open*/
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.411);
+    padding-top: 0px;
+    padding-bottom: 30px;
+}
+
+.quickview-top {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #FF4C4F;
+    border-radius: 5px;
+    padding: 1px;
+     position: absolute;
+    top: -4%;        
+    left: 0;      
+    width: 100%; 
+}
+
+#quickview-close {
+    width: 2%;
+    height: auto;
+    
+}
+
+.quickview-content {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.quickview-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.quickview-img {
+    width: 312px;
+    height: 445px;
+    object-fit: cover;
+    margin: 0 20px;
+    transition: transform 0.3s ease;
+}
+
+.quickview-right {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 20px;
+    border-radius: 15px;
+    background-color: #e0e0e0;;
+}
+
+.quickview-right hr {
+    margin-bottom: 10px;
+    width: 90%;
+    background-color: black;
+}
+
+#quickview-title {
+    align-self: flex-start;
+    text-align: left;
+    color: black;
+    font-weight: bold;
+    font-size: 24px;
+    padding: 0px 10px;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+#quickview-price {
+    align-self: flex-start;
+    text-align: left;
+    color: black;
+    font-size: 24px;
+    padding: 0px 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#quickview-quantity {
+    align-self: flex-start;
+    text-align: left;
+    color: black;
+    font-size: 18px;
+    padding: 0px 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.up-downQuantity{
+    align-self: flex-start;
+    align-items: center;
+    background-color: #A6A6A6;
+    padding: 5px 10px;
+    margin: 0px 10px;
+    border-radius: 25px;
+}
+
+.add-button {
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border-radius: 50%;
+    transition: opacity 0.3s ease, transform 0.2 ease;
+}
+
+.add-button:hover {
+    opacity: 0.6;
+    transform: scale(1.05);
+}
+
+.add-button:active {
+    transform: scale(0.95);
+}
+
+#add-quantity{
+    align-self: flex-start;
+    margin: 0px 15px;
+    
+}
+
+.quickview-detail{
+    text-align: left;
+    color: black;
+    padding: 5px 10px;
+    margin: 5px 10px;
+    border-radius: 25px;
+}
+
+.quickview-button {
+    background-color: #9FFB6D;
+    color: black;
+    font-family: Noto Sans Thai;
+    font-size: 24px;
+    border-radius: 15px;
+    border: white;
+    padding: 5px 20px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin-right: 20px;
+    align-self: flex-end;
+}
+
+.quickview-button:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    transform: scale(0.98);
+}
+
+.quickview-button:active {
+    opacity: 1;
+}
+
+
 .storage-container {
     grid-column: 1 / span 3;
     margin-top: 50px;
@@ -268,6 +454,31 @@ body {
 .tab-bottom-container hr {
     margin-bottom: 25px;
 }
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ff4c4f79;
+    display: none;
+    /*none = close overlay and block to open*/
+    z-index: 100;
+    /*what z-index can do? = use to make text or image infront or behind ไว้หน้าหลังจัดลำดับได้ https://www.w3schools.com/cssref/pr_pos_z-index.php*/
+}
+#side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: #FF4C4F;
+    color: white;
+    display: none;
+    /*none = close overlay and block to open*/
+    z-index: 100;
+}
+
 
 @media (max-width: 1024px) {
 
