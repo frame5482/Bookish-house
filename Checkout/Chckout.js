@@ -180,7 +180,7 @@ document.getElementById('btnPay').addEventListener('click', async () => {
             return;
         }
 
-        alert("ชำระเงินเรียบร้อย! สร้าง Order ใหม่แล้ว");
+        alert("ชำระเงินเรียบร้อย!");
         loadCart(); // โหลด cart ใหม่ ให้ว่าง
     } catch (err) {
         console.error("Pay Error:", err);

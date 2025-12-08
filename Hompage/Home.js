@@ -77,7 +77,7 @@ function renderBooks(data) {
         
         if (targetContainer) {
             const itemWrapper = document.createElement('div');
-            itemWrapper.className = 'book-item'; // ใช้ class ตามที่ท่านต้องการ
+            itemWrapper.className = 'book-item'; 
 
             // --- ส่วนรูปภาพ ---
             const img = document.createElement('img');
@@ -85,10 +85,9 @@ function renderBooks(data) {
             img.src = '../img/Book_Img/' + book.Book_Img; 
             img.alt = book.Book_Name;
             
-            // *** จุดเชื่อมต่อ Quick View ***
-            img.style.cursor = 'pointer'; // เปลี่ยนเมาส์เป็นรูปมือ
+            img.style.cursor = 'pointer'; 
             img.addEventListener('click', () => {
-                openQuickView(book); // เรียกฟังก์ชันเปิดหน้าต่าง
+                openQuickView(book); 
             });
             
             itemWrapper.appendChild(img);
@@ -101,7 +100,7 @@ function renderBooks(data) {
 
             const QuantityDiv = document.createElement('div');
             QuantityDiv.className = 'book-quantity';
-            QuantityDiv.innerText = "คงเหลือ: " + (book.Book_Quantity || "ไม่ระบุ") + " เล่ม";
+            QuantityDiv.innerText = "คงเหลือ: " + (book.Book_Quantity || "0") + " เล่ม";
             itemWrapper.appendChild(QuantityDiv);
             // --- ส่วนราคา ---
             const priceDiv = document.createElement('div');
@@ -121,7 +120,7 @@ function renderBooks(data) {
         const response = await fetch('/addToOrder', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            credentials: 'same-origin', // ต้องส่ง cookie
+            credentials: 'same-origin',
             body: JSON.stringify({ Book_ID: book.Book_ID })
         });
 
@@ -181,7 +180,7 @@ function openQuickView(book) {
     qvPrice.innerText = parseFloat(book.Book_Price).toFixed(2) + ' บาท';
     qvImg.src = '../img/Book_Img/' + book.Book_Img;
     
-    qvDetail.innerText = book.Book_Detail || "รายละเอียดเพิ่มเติมของหนังสือเล่มนี้ กำลังรอการบันทึกจากบรรณารักษ์...";
+    qvDetail.innerText = book.Book_Detail || "รายละเอียดเพิ่มเติมของหนังสือเล่มนี้ กำลังรอการบันทึก...";
     qvquantity.innerText = "คงเหลือ: " + (book.Book_Quantity || "0") + " เล่ม";
     currentQuantity = 1;
     if(qvQuantityDisplay) qvQuantityDisplay.innerText = 'x' + currentQuantity;
@@ -193,7 +192,7 @@ function openQuickView(book) {
     if(overlayWrapper) overlayWrapper.style.display = 'block';
 
     // =======================
-    // ผูกปุ่มสั่งซื้อเลย
+    // ปุ่มสั่งซื้อ
     // =======================
     const buyBtn = document.getElementById('Buynow');
     if(buyBtn) {
@@ -205,10 +204,10 @@ function openQuickView(book) {
                 const response = await fetch('/addToOrder', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    credentials: 'same-origin', // ให้ cookie ส่งไปด้วย
+                    credentials: 'same-origin', 
                     body: JSON.stringify({ 
                         Book_ID: currentBook.Book_ID, 
-                        Quantity: currentQuantity // ส่งจำนวนไปด้วย
+                        Quantity: currentQuantity 
                     })
                 });
 

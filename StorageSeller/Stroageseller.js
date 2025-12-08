@@ -75,6 +75,28 @@ document.querySelectorAll('.tag-category').forEach(btn => {
 });
 
 
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', (e) => {
+    
+    const searchText = e.target.value.toLowerCase().trim();
+
+    const filteredBooks = bookData.filter(book => {
+        return book.Book_Name && book.Book_Name.toLowerCase().includes(searchText);
+    });
+
+    renderBooks(filteredBooks);
+});
+
+const searchIcon = document.getElementById('searchimg');
+
+searchIcon.addEventListener('click', () => {
+    // บังคับให้เกิด Event ค้นหาตามค่าที่มีอยู่ใน input ตอนนั้น
+    const searchText = searchInput.value.toLowerCase().trim();
+    const filteredBooks = bookData.filter(book => book.Book_Name.toLowerCase().includes(searchText));
+    renderBooks(filteredBooks);
+});
+
+
 function renderBooks(data) {
    const container = document.getElementById('Book-container');
     if(!container) return;
@@ -119,14 +141,8 @@ function renderBooks(data) {
             itemWrapper.appendChild(priceDiv);
 
             // --- ปุ่มเพิ่มลงตะกร้า (หน้ารวม) ---
-            const btn = document.createElement('input');
-            btn.className = 'add-basket';
-            btn.type = 'button';
-            btn.value = 'เพิ่มลงในรถเข็น';
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation(); // กันไม่ให้กดปุ่มแล้ว QuickView เด้ง (เผื่อปุ่มทับรูป)
-                alert(`ท่านได้หยิบ "${book.Book_Name}" ใส่รถเข็นแล้ว!`);
-            });
+            const btn = document.createElement('div');
+           
             itemWrapper.appendChild(btn);
 
             targetContainer.appendChild(itemWrapper);

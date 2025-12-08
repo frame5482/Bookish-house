@@ -62,6 +62,8 @@ con.connect(function(err) {
       });
     });
   });
+
+
 });
 
 function queryDB(sql, params = []) {
@@ -415,13 +417,11 @@ app.post('/addBook', upload.single("book_img"), async (req, res) => {
         )`;
         await queryDB(createTableSql);
 
-        // 2. ตรวจสอบว่ามีหนังสือซ้ำหรือไม่
-        // (ระวัง: การใช้ ${} ตรงนี้ถ้าชื่อมี ' หรือ " จะ Error ได้ แต่ข้าคงไว้ตาม style ท่านก่อน)
+       
         let checkSql = `SELECT * FROM Book WHERE Book_Name = "${name}" AND Seller_ID = "${Seller_ID}"`;
         let existingBooks = await queryDB(checkSql);
 
         if (existingBooks.length > 0) {
-            // ⚔️ กรณีเจอของเดิม (Update)
             let currentBook = existingBooks[0];
             let updateSql = `UPDATE Book SET Book_Quantity = Book_Quantity + 1`;
 
@@ -436,17 +436,14 @@ app.post('/addBook', upload.single("book_img"), async (req, res) => {
             res.send({ message: "เพิ่มจำนวนหนังสือเรียบร้อยแล้ว", bookID: currentBook.Book_ID, action: "updated" });
 
         } else {
-            // ✨ กรณีของใหม่ (Insert)
+            
             if (!filename) {
                 return res.status(400).send({ message: "กรุณาแนบรูปภาพหนังสือด้วยขอรับ!" });
             }
 
-            // สุ่ม ID
             let generatedBookID = "B" + Math.floor(10000 + Math.random() * 90000);
             
-            // 🛡️ เช็คก่อนว่า Seller_ID มีจริงไหม (กันเหนียว)
-            // ถ้ามั่นใจว่า Database ท่านมี FK แล้ว ข้ามส่วนนี้ไปให้ SQL ตัดสินก็ได้
-            // แต่ถ้า Seller_ID มั่ว SQL จะ Error ตรงนี้แหละขอรับ
+          
 
             let insertSql = `INSERT INTO Book (
                 Book_ID, Book_Price, Book_Name, Book_Img, Book_Detail, 
@@ -469,10 +466,9 @@ app.post('/addBook', upload.single("book_img"), async (req, res) => {
         }
 
     } catch (error) {
-        // 🚨 จุดสำคัญ! ดู Error ที่ Terminal (จอดำ) นะขอรับ
-        console.error("🔥 Server Error Log:", error);
+       
+        console.error(" Server Error Log:", error);
 
-        // เช็คว่าเป็นเพราะ Seller_ID ไม่มีจริงหรือไม่
         if (error.code === 'ER_NO_REFERENCED_ROW_2' || error.message.includes('foreign key constraint fails')) {
             return res.status(500).send({ message: `ล้มเหลว! ไม่พบ Seller ID: ${req.body.seller_id} ในระบบ (กรุณาสมัครสมาชิกก่อน)` });
         }
@@ -480,8 +476,6 @@ app.post('/addBook', upload.single("book_img"), async (req, res) => {
         res.status(500).send({ message: "ล้มเหลว! " + error.message });
     }
 })
-
-
 
 app.get('/getBooks', async (req, res) => {
     try {
@@ -500,10 +494,9 @@ app.post('/addToOrder', async (req, res) => {
         const quantity = req.body.Quantity || 1;
 
         if(!userID) {
-            return res.send(`<script>alert('ช้าก่อน! เจ้าต้องเข้าสู่ระบบก่อน'); window.location='/Login/login.html';</script>`);
+            return res.send(`<script>alert('ต้องเข้าสู่ระบบก่อน'); window.location='/Login/login.html';</script>`);
         }
 
-        // ดึงราคาหนังสือ
         let bookSql = `SELECT Book_Price, Book_Quantity 
                FROM Book 
                WHERE Book_ID = ? 
@@ -516,7 +509,7 @@ app.post('/addToOrder', async (req, res) => {
 
         let pricePerUnit = bookResult[0].Book_Price;
 
-        // สร้าง table ถ้าไม่มี
+        // สร้าง table 
         await queryDB(`
             CREATE TABLE IF NOT EXISTS Orders (
                 Order_ID VARCHAR(20) PRIMARY KEY,
@@ -582,7 +575,7 @@ app.post('/addToOrder', async (req, res) => {
         return res.redirect('/Hompage/Home.html');
 
     } catch(err) {
-        console.error("🔥 AddToOrder Error:", err);
+        console.error(" AddToOrder Error:", err);
         return res.send("เกิดข้อผิดพลาด: " + err.message);
     }
 });
@@ -688,11 +681,11 @@ app.post('/Checkout', async (req, res) => {
         // ทำเครื่องหมาย Order เป็น "Paid" หรือ "Completed"
         await queryDB(`UPDATE Orders SET Status = 'Paid' WHERE Order_ID = ?`, [currentOrderID]);
 
-        // สร้าง Order ใหม่ สำหรับซื้อครั้งถัดไป
+        // สร้าง Order ใหม่ 
         const newOrderID = "BH" + Math.floor(100000 + Math.random() * 900000);
         await queryDB(`INSERT INTO Orders (Order_ID, User_ID) VALUES (?, ?)`, [newOrderID, userID]);
 
-        // คืนค่า Order ใหม่ให้ Frontend
+        
         res.json({ message: 'ชำระเงินเรียบร้อย', newOrderID });
     } catch (err) {
         console.error("Checkout Error:", err);
