@@ -64,6 +64,7 @@ con.connect(function(err) {
   });
 
 
+    
 });
 
 function queryDB(sql, params = []) {
@@ -438,7 +439,7 @@ app.post('/addBook', upload.single("book_img"), async (req, res) => {
         } else {
             
             if (!filename) {
-                return res.status(400).send({ message: "กรุณาแนบรูปภาพหนังสือด้วยขอรับ!" });
+                return res.status(400).send({ message: "กรุณาแนบรูปภาพหนังสือด้วย" });
             }
 
             let generatedBookID = "B" + Math.floor(10000 + Math.random() * 90000);
