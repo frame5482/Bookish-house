@@ -483,6 +483,83 @@ body.checkout-page {
     margin-bottom: 25px;
 }
 
+/* ---------- Cart List ---------- */
+#cart-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* ช่องว่างระหว่างรายการ */
+    padding: 10px;
+}
+
+/* ขณะยังไม่มีสินค้า / กำลังโหลด */
+.cart-empty {
+    background-color: #f8d7da; /* สีชมพูอ่อนแบบแจ้งเตือน */
+    color: #721c24;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* ---------- Cart Item ---------- */
+.cart-item {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    gap: 12px;
+}
+
+/* รูปภาพสินค้า */
+.cart-item img.book-img {
+    width: 90px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 6px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.cart-item img.book-img:hover {
+    transform: scale(1.05);
+    opacity: 0.85;
+}
+
+/* รายละเอียดสินค้า */
+.cart-item-name {
+    font-size: 16px;
+    font-weight: 600;
+    flex: 2; /* กินพื้นที่มากกว่า */
+    word-break: break-word;
+}
+
+.cart-item-quantity,
+.cart-item-price {
+    font-size: 14px;
+    flex: 1;
+    text-align: center;
+}
+
+/* ปุ่มลบสินค้า */
+.remove-item-btn {
+    background-color: #ff4c4f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 5px 12px;
+    cursor: pointer;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.remove-item-btn:hover {
+    opacity: 0.8;
+    transform: scale(0.95);
+}
+
 /* ====== responsive ====== */
 @media (max-width: 900px) {
     .checkout-layout {
@@ -498,4 +575,6 @@ body.checkout-page {
         padding-left: 30px;
         padding-right: 30px;
     }
+
+    
 }

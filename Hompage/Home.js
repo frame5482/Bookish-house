@@ -66,10 +66,28 @@ function renderBooks(data) {
             btn.className = 'add-basket';
             btn.type = 'button';
             btn.value = 'เพิ่มลงในรถเข็น';
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation(); // กันไม่ให้กดปุ่มแล้ว QuickView เด้ง (เผื่อปุ่มทับรูป)
-                alert(`ท่านได้หยิบ "${book.Book_Name}" ใส่รถเข็นแล้ว!`);
-            });
+           btn.addEventListener('click', async (e) => {
+    e.stopPropagation();
+
+    try {
+        const response = await fetch('/addToOrder', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin', // ต้องส่ง cookie
+            body: JSON.stringify({ Book_ID: book.Book_ID })
+        });
+
+        if (response.redirected) {
+            window.location.href = response.url;
+        } else {
+            alert(`ท่านได้หยิบ "${book.Book_Name}" ใส่รถเข็นแล้ว!`);
+        }
+
+    } catch (err) {
+        console.error('Add to Order ล้มเหลว:', err);
+        alert('ไม่สามารถเพิ่มหนังสือลงรถเข็นได้');
+    }
+});
             itemWrapper.appendChild(btn);
 
             targetContainer.appendChild(itemWrapper);
@@ -96,13 +114,13 @@ const qvPrice = document.getElementById('quickview-price');
 const qvDetail = document.getElementById('quickview-detail');
 const qvquantity = document.getElementById('quickview-quantity');
 const qvQuantityDisplay = document.getElementById('add-quantity');
+let currentBook = null; // เก็บ book ปัจจุบัน
 let currentQuantity = 1;
-
-
-//  Quick View
 
 function openQuickView(book) {
     if (!quickViewModal) return;
+
+    currentBook = book; // เก็บ object หนังสือปัจจุบัน
 
     qvTitle.innerText = book.Book_Name;
     qvPrice.innerText = parseFloat(book.Book_Price).toFixed(2) + ' บาท';
@@ -118,6 +136,40 @@ function openQuickView(book) {
     
     const overlayWrapper = document.querySelector('.overlay-container');
     if(overlayWrapper) overlayWrapper.style.display = 'block';
+
+    // =======================
+    // ผูกปุ่มสั่งซื้อเลย
+    // =======================
+    const buyBtn = document.getElementById('Buynow');
+    if(buyBtn) {
+        buyBtn.onclick = async (e) => {
+            e.preventDefault();
+            if(!currentBook) return;
+
+            try {
+                const response = await fetch('/addToOrder', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'same-origin', // ให้ cookie ส่งไปด้วย
+                    body: JSON.stringify({ 
+                        Book_ID: currentBook.Book_ID, 
+                        Quantity: currentQuantity // ส่งจำนวนไปด้วย
+                    })
+                });
+
+                if(response.redirected) {
+                    window.location.href = response.url; 
+                } else {
+                    const result = await response.text();
+                    alert(`ท่านได้สั่งซื้อ "${currentBook.Book_Name}" จำนวน ${currentQuantity} เล่มแล้ว!`);
+                    closeQuickView();
+                }
+            } catch(err) {
+                console.error('Add to Order ล้มเหลว:', err);
+                alert('ไม่สามารถเพิ่มหนังสือลงรถเข็นได้');
+            }
+        };
+    }
 }
 function closeQuickView() {
     if(quickViewModal) quickViewModal.style.display = 'none';

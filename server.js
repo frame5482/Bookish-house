@@ -12,6 +12,8 @@ const path = require('path');
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser())
+
 
 const con = mysql.createConnection({
      host: "localhost",
@@ -370,6 +372,128 @@ app.get('/getBooks', async (req, res) => {
         res.status(500).json({ message: "ไม่สามารถดึงข้อมูลหนังสือได้" });
     }
 });
+app.post('/addToOrder', async (req, res) => {
+    try {
+        const userID = req.cookies.User_ID;
+        const bookID = req.body.Book_ID;
+        const quantity = req.body.Quantity || 1;
+
+        if(!userID) {
+            return res.send(`<script>alert('ช้าก่อน! เจ้าต้องเข้าสู่ระบบก่อน'); window.location='/Login/login.html';</script>`);
+        }
+
+        // ดึงราคาหนังสือ
+        let bookSql = `SELECT Book_Price FROM Book WHERE Book_ID = ?`;
+        let bookResult = await queryDB(bookSql, [bookID]);
+        if(bookResult.length === 0) return res.send(`<script>alert('ไม่พบหนังสือเล่มนี้'); window.history.back();</script>`);
+
+        let pricePerUnit = bookResult[0].Book_Price;
+
+        // สร้าง table ถ้าไม่มี
+        await queryDB(`
+            CREATE TABLE IF NOT EXISTS Orders (
+                Order_ID VARCHAR(20) PRIMARY KEY,
+                User_ID VARCHAR(15),
+                Status VARCHAR(20) DEFAULT 'Pending',
+                Created_At DATETIME DEFAULT CURRENT_TIMESTAMP,
+                Order_Price DECIMAL(10,2) DEFAULT 0,
+                Order_Date DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+        await queryDB(`
+            CREATE TABLE IF NOT EXISTS OrderDetail (
+                Detail_ID INT AUTO_INCREMENT PRIMARY KEY,
+                Order_ID VARCHAR(20) NOT NULL,
+                Book_ID VARCHAR(10) NOT NULL,
+                Book_Total INT DEFAULT 1,
+                Book_Price DECIMAL(10,2),
+                Unit_Price DECIMAL(10,2),
+                FOREIGN KEY (Order_ID) REFERENCES Orders(Order_ID) ON DELETE CASCADE,
+                FOREIGN KEY (Book_ID) REFERENCES Book(Book_ID) ON DELETE CASCADE
+            )
+        `);
+
+        // หา order pending ของ user
+        let findOrderSql = `SELECT Order_ID FROM Orders WHERE User_ID = ? AND Status = 'Pending' LIMIT 1`;
+        let orderResult = await queryDB(findOrderSql, [userID]);
+
+        let currentOrderID;
+        if(orderResult.length > 0){
+            currentOrderID = orderResult[0].Order_ID;
+        } else {
+            currentOrderID = "BH" + Math.floor(100000 + Math.random() * 900000);
+            await queryDB(`INSERT INTO Orders (Order_ID, User_ID) VALUES (?, ?)`, [currentOrderID, userID]);
+        }
+
+        // ตรวจสอบ OrderDetail
+        let checkItemSql = `SELECT * FROM OrderDetail WHERE Order_ID = ? AND Book_ID = ?`;
+        let existingItem = await queryDB(checkItemSql, [currentOrderID, bookID]);
+
+        if(existingItem.length > 0){
+            // update จำนวน
+            let updateSql = `
+                UPDATE OrderDetail
+                SET Book_Total = Book_Total + ?,
+                    Unit_Price = (Book_Total + ?) * ?
+                WHERE Order_ID = ? AND Book_ID = ?
+            `;
+            await queryDB(updateSql, [quantity, quantity, pricePerUnit, currentOrderID, bookID]);
+        } else {
+            // insert ใหม่
+            await queryDB(`
+                INSERT INTO OrderDetail (Order_ID, Book_ID, Book_Total, Book_Price, Unit_Price)
+                VALUES (?, ?, ?, ?, ?)
+            `, [currentOrderID, bookID, quantity, pricePerUnit, pricePerUnit * quantity]);
+        }
+
+        // อัปเดตราคารวม
+        let total = await queryDB(`SELECT SUM(Unit_Price) AS Total FROM OrderDetail WHERE Order_ID = ?`, [currentOrderID]);
+        let sumPrice = total[0].Total || 0;
+        await queryDB(`UPDATE Orders SET Order_Price = ? WHERE Order_ID = ?`, [sumPrice, currentOrderID]);
+
+        return res.redirect('/order.html?orderid=' + currentOrderID);
+
+    } catch(err) {
+        console.error("🔥 AddToOrder Error:", err);
+        return res.send("เกิดข้อผิดพลาด: " + err.message);
+    }
+});
+app.get('/getOrderDetail', async (req, res) => {
+    try {
+        const userID = req.cookies.User_ID;
+
+        if (!userID) {
+            return res.status(401).json({ message: "โปรดเข้าสู่ระบบก่อน" });
+        }
+
+        // ดึง order pending ล่าสุด
+        const orderSql = `SELECT Order_ID FROM Orders WHERE User_ID = ? AND Status = 'Pending' LIMIT 1`;
+        const orders = await queryDB(orderSql, [userID]);
+
+        if (orders.length === 0) {
+            return res.json({ orderID: null, items: [] });
+        }
+
+        const orderID = orders[0].Order_ID;
+
+        // ดึง OrderDetail พร้อมข้อมูลหนังสือ
+        const detailSql = `
+            SELECT od.Book_ID, od.Book_Total, od.Unit_Price, b.Book_Name, b.Book_Img
+            FROM OrderDetail od
+            JOIN Book b ON od.Book_ID = b.Book_ID
+            WHERE od.Order_ID = ?
+        `;
+        const items = await queryDB(detailSql, [orderID]);
+
+        res.json({ orderID, items });
+    } catch (err) {
+        console.error("Error fetching OrderDetail:", err);
+        res.status(500).json({ message: "ไม่สามารถดึงรายการสั่งซื้อได้" });
+    }
+});
+
+
+
 
  app.listen(port, hostname, () => {
         console.log(`Server running at   http://${hostname}:${port}/Login/login.html`);
