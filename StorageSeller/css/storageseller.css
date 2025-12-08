@@ -32,7 +32,13 @@ body {
     height: auto;
 }
 
-#profile,#basket {
+#profile{
+  width: 4%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
+
+#basket{
     width: 4%;
     height: auto;
 }
@@ -377,6 +383,28 @@ body {
     text-align: left;
 }
 
+.submit-btn {
+    background-color: #ff7b7d;
+    color: white;
+    font-family: Noto Sans Thai;
+    font-size: 18px;
+    border-radius: 5px;
+    border: white;
+    padding: 0.75% 1%;
+    margin-left: 1%;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.submit-btn:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    transform: scale(0.98);
+}
+
+.submit-btn:active {
+    opacity: 1;
+}
+
 .book-box{
     width: 100%;
     height: 100%;
@@ -386,10 +414,18 @@ body {
 
 .book-header{
     margin-left: 3%;
+    margin-right: 3%;
+}
+
+.book-item {
+    display: grid;
+    justify-items: center;
+    width: 100%;
+    max-width: 400px;
 }
 
 .book-img {
-    width: 50%;
+    width: 70%;
     aspect-ratio: 312/445; /*use for define the ratio between width and height ใช้กำหนดขนาดได้เวลาปรับจะได้ดูดีด้วย https://www.w3schools.com/cssref/css_pr_aspect-ratio.php*/
     object-fit: cover;
     margin: 0 20px;
