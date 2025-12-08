@@ -28,15 +28,40 @@ con.connect(function(err) {
   con.query("CREATE DATABASE IF NOT EXISTS Bookishhouse", function (err, result) {
     if (err) throw err;
     console.log("Database created");
-  });
 
     con.changeUser({database : 'Bookishhouse'}, function(err) {
-    if (err) throw err;
-    console.log("Using Database Bookishhouse");
-  });
-   
+      if (err) throw err;
+      console.log("Using Database Bookishhouse");
 
-})
+      con.query(`CREATE TABLE IF NOT EXISTS Seller (
+        Seller_ID VARCHAR(15) NOT NULL,
+        Seller_Name VARCHAR(100) UNIQUE,   
+        Seller_Email VARCHAR(100) UNIQUE,   
+        Seller_Password VARCHAR(100),
+        Seller_img VARCHAR(100),
+        Seller_Birthday DATE,
+        PRIMARY KEY (Seller_ID)
+      )`, function(err, result) {
+        if(err) throw err;
+        console.log("Seller table ready");
+      });
+
+      con.query(`CREATE TABLE IF NOT EXISTS User (
+        User_ID VARCHAR(15) NOT NULL,
+        User_Name VARCHAR(100) UNIQUE,  
+        User_Email VARCHAR(100) UNIQUE,  
+        User_Password VARCHAR(100),
+        User_img VARCHAR(100),
+        User_Birthday DATE,
+        PRIMARY KEY (User_ID)
+      )`, function(err, result) {
+        if(err) throw err;
+        console.log("User table ready");
+      });
+    });
+  });
+});
+
 function queryDB(sql, params = []) {
     return new Promise((resolve, reject) => {
         con.query(sql, params, (err, results) => {
@@ -45,6 +70,8 @@ function queryDB(sql, params = []) {
         });
     });
 }
+
+
 //avatar upload setup
 const storage = multer.diskStorage({
     destination: (req, file, callback) => {
@@ -144,8 +171,6 @@ app.post('/regisDB', async (req, res) => {
         }
 
 
-
-
         sql = `INSERT INTO User (
             User_ID, User_Name, User_Email, User_Password, User_Birthday
         ) VALUES (
@@ -193,6 +218,7 @@ app.post('/regisSeller', async (req, res) => {
             Seller_Birthday DATE,
             PRIMARY KEY (Seller_ID)
         )`;
+        
         let result = await queryDB(sql);
 
          const username = req.body.username;  
