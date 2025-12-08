@@ -392,10 +392,16 @@ body {
 
 .book-header{
     margin-left: 3%;
+    margin-right: 3%;
+}
+
+.book-item {
+    display: grid;
+    justify-items: center;
 }
 
 .book-img {
-    width: 50%;
+    width: 70%;
     aspect-ratio: 312/445; /*use for define the ratio between width and height ใช้กำหนดขนาดได้เวลาปรับจะได้ดูดีด้วย https://www.w3schools.com/cssref/css_pr_aspect-ratio.php*/
     object-fit: cover;
     margin: 0 20px;
