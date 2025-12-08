@@ -114,10 +114,8 @@ const updateImg = async (username, filen) => {
 
 
 app.post('/regisDB', async (req, res) => {
-    const username = req.body.username;  
-    const email = req.body.email;
-
     try {
+         
         let generatedID = "UID" + Math.floor(1000 + Math.random() * 9000);
 
         let sql = `CREATE TABLE IF NOT EXISTS User (
@@ -131,6 +129,8 @@ app.post('/regisDB', async (req, res) => {
         )`;
         await queryDB(sql);
 
+         const username = req.body.username;  
+           const email = req.body.email;
      // ตรวจสอบว่าชื่อซ้ำใน User
         let existingUser = await queryDB(`SELECT * FROM User WHERE User_Name = ? OR User_Email = ? LIMIT 1`, [username, email]);
         if (existingUser.length > 0) {
@@ -180,9 +180,8 @@ app.post('/regisDB', async (req, res) => {
 });
 
 app.post('/regisSeller', async (req, res) => {
-     const username = req.body.username;  
-    const email = req.body.email;
     try {
+       
         let generatedID = "SE" + Math.floor(10000 + Math.random() * 90000);
 
         let sql = `CREATE TABLE IF NOT EXISTS Seller (
@@ -196,6 +195,8 @@ app.post('/regisSeller', async (req, res) => {
         )`;
         let result = await queryDB(sql);
 
+         const username = req.body.username;  
+        const email = req.body.email;
 
          // ตรวจสอบว่าชื่อซ้ำใน User
         let existingUser = await queryDB(`SELECT * FROM User WHERE User_Name = ? OR User_Email = ? LIMIT 1`, [username, email]);
