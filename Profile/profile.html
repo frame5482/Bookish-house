@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>Login</title>
-		<link type="text/css" rel="stylesheet" href="css/profile.css">
-		<script type="text/javascript" src="js/main.js"></script>
-		<link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
-	</head>
-	<body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Profile Settings</title>
+    <link type="text/css" rel="stylesheet" href="css/profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
+    	<script type="text/javascript" src="profile.js"></script>
+
+  </head>
+  <body>
     <div class="grid-container">
 
       <div class="nav-container">
         <div class="nav-top">
           <div class="top-left">
             <img id="tab-search" src="../img/Logo_Icon/Tab.png" class="click-img">
-            <a  href="../Hompage/Home.html">
+            <a href="../Hompage/Home.html">
             <img id="logo" src="../img/Logo_Icon/Logo.png" alt="Home" class="click-img">
              </a>
           </div>
@@ -25,9 +26,11 @@
             </div>
             <img id="basket" src="../img/Logo_Icon/basket.png" class="click-img">
             <img id="lineSpace" src="../img/Logo_Icon/LineSpace.png">
+            
             <img id="profile" src="../img/Logo_Icon/avatar.png" class="click-img">
-            <a class="login-register" href="#">LOGIN/REGISTER</a>
-          </div>
+
+           <a class="login-register" id = "Uname" href="../Profile/profile.html"></a>
+            <a class="login-register" id = "login" href="../Login/login.html">LOGIN/REGISTER</a>            </div>
         </div>
         <div class="nav-bottom">
           <a class="tag-book" href="#">มังงะ</a>
@@ -39,32 +42,36 @@
     
       <div class="profile-container">
         <legend id="profileHead">ข้อมูลผู้ใช้</legend>
-        <div id=profile-box>
-        <div id="profile-left">
-          <img id="profilepage" src="../img/Book_Img/A Little History of Philosophy.png">
-          <input class="add-profile" type="submit" value="เพิ่มรูป">
-        </div>
-        <div id="profile-right">
-          <form class="form" action="" method="post" accept-charset="utf-8">
-            <div class="userProfile">
-              ชื่อผู้ใช้งาน
+        
+        <div id="profile-box">
+            
+            <div id="profile-left">
+              <img id="profilepage" src="../img/Book_Img/">
+
+              <div style="margin-top: 10px;">
+                  <label for="avatarInput" class="add-profile" >เลือกรูปภาพ</label>
+                  <input id="avatarInput" type="file" name="avatar" accept="image/*" style="display: none;" onchange="previewImage(event)">
+              </div>
             </div>
-            <input class="inputuser" type="text" name="username" value="" placeholder="" required><br>
-            <div class="userProfile">
-              อีเมล
+
+            <div id="profile-right">
+              <div class="form">
+                <div class="userProfile">ชื่อผู้ใช้งาน</div>
+                <input id="usernameInput" class="inputuser" type="text" name="username" required><br>
+                
+                <div class="userProfile">อีเมล</div>
+                <input id="emailInput" class="inputuser" type="email" name="email" required><br>
+                
+                <div class="userProfile">วัน/เดือน/ปีเกิด</div>
+                <input id="dateInput" class="inputuser" type="date" name="date" required><br>
+                
+                <div class="userProfile">ที่อยู่สำหรับจัดส่ง</div>
+                <input id="addressInput" class="inputuser" type="text" name="address" required><br>
+                
+                <input class="profile-save" type="button" value="บันทึก" onclick="updateProfile()">
+              </div>
             </div>
-            <input class="inputuser" type="email" name="email" value="" placeholder="" required><br>
-            <div class="userProfile">
-              วัน/เดือน/ปีเกิด
-            </div>
-            <input class="inputuser" type="date" name="date" value="" placeholder="" required><br>
-            <div class="userProfile">
-              ที่อยู่สำหรับจัดส่ง
-            </div>
-            <input class="inputuser" type="text" name="address" value="" placeholder="" required><br>
-            <input class="profile-save" type="submit" value="บันทึก">
-          </form>
-        </div>
+
         </div>
       </div>
     
@@ -74,5 +81,3 @@
       </div>
     
     </div>
-	</body>
-</html>

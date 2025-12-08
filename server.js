@@ -40,6 +40,7 @@ con.connect(function(err) {
         Seller_Password VARCHAR(100),
         Seller_img VARCHAR(100),
         Seller_Birthday DATE,
+        Seller_Address VARCHAR(255),    
         PRIMARY KEY (Seller_ID)
       )`, function(err, result) {
         if(err) throw err;
@@ -53,6 +54,7 @@ con.connect(function(err) {
         User_Password VARCHAR(100),
         User_img VARCHAR(100),
         User_Birthday DATE,
+        User_Address VARCHAR(255),
         PRIMARY KEY (User_ID)
       )`, function(err, result) {
         if(err) throw err;
@@ -103,39 +105,82 @@ const imageFilter = (req, file, cb) => {
 };
 
 const upload = multer({ storage: storage, fileFilter: imageFilter });
-const uploadprofile = multer({ storageprofile: storageprofile, fileFilter: imageFilter });
+const uploadprofile = multer({ storage: storageprofile, fileFilter: imageFilter });
 
 
-app.post('/profilepic', uploadprofile.single("avatar"),async(req,res) => {
-        try{
-        const username = req.cookies.username;
-        
-        if (!req.file) {
-            console.log("No file uploaded.");
-            return res.redirect('feed.html');
-        }
-        
-        const newFilename = req.file.filename;
-        await updateImg(username, newFilename);
-
-        res.cookie('img', newFilename);
-        return res.redirect('feed.html');
-
-    }catch (err) {
-        console.error("Error uploading profile picture:", err);
-        return res.redirect('feed.html');
-    }
-})
-
-const updateImg = async (username, filen) => {
-    let sql = `UPDATE userInfo SET img = '${filen}' WHERE username = '${username}'`;
+app.post('/Updateinfo', uploadprofile.single("avatar"), async (req, res) => {
     try {
-        await queryDB(sql);
+    
+
+        // 1. ดึง ID จาก Cookie
+        const userID = req.cookies.User_ID;
+        const sellerID = req.cookies.Seller_ID;
+
+        if (!userID && !sellerID) {
+            console.log("ไม่พบ Cookie User_ID หรือ Seller_ID");
+            return res.send("<script>alert('Session หมดอายุ กรุณาล็อกอินใหม่'); window.location='/Login/login.html';</script>");
+        }
+
+       const { username, email, date, address } = req.body;
+        const newImage = req.file ? req.file.filename : null;
+
+        let sql = "";
+        let params = [];
+
+        
+        //   USER
+        
+        if (userID) {
+            console.log(`👤 อัปเดต User ID: ${userID}`);
+            if (newImage) {
+                // เปลี่ยนรูป + ข้อมูล
+                sql = `UPDATE User SET User_Name=?, User_Email=?, User_Birthday=?, User_Address=?, User_img=? WHERE User_ID=?`;
+                params = [username, email, date, address, newImage, userID];
+                res.cookie('img', newImage); 
+            } else {
+                // เปลี่ยนแค่ข้อมูล
+                sql = `UPDATE User SET User_Name=?, User_Email=?, User_Birthday=?, User_Address=? WHERE User_ID=?`;
+                params = [username, email, date, address, userID];
+            }
+        } 
+
+        //  SELLER
+        else if (sellerID) {
+            console.log(`🏪 อัปเดต Seller ID: ${sellerID}`);
+            if (newImage) {
+                sql = `UPDATE Seller SET Seller_Name=?, Seller_Email=?, Seller_Birthday=?, Seller_Address=?, Seller_img=? WHERE Seller_ID=?`;
+                params = [username, email, date, address, newImage, sellerID];
+                res.cookie('img', newImage);
+            } else {
+                sql = `UPDATE Seller SET Seller_Name=?, Seller_Email=?, Seller_Birthday=?, Seller_Address=? WHERE Seller_ID=?`;
+                params = [username, email, date, address, sellerID];
+            }
+        }
+
+        if (sql) {
+            await queryDB(sql, params);
+            console.log(" Database Updated Successfully!");
+            
+            return res.send(`
+                <script>
+                    alert('บันทึกข้อมูลเรียบร้อยแล้ว!');
+                    window.location = '/Profile/profile.html';
+                </script>
+            `);
+        } else {
+            throw new Error("เกิดข้อผิดพลาดในการสร้างคำสั่ง SQL");
+        }
 
     } catch (err) {
-        console.error("Error in updateImg helper:", err);
+        console.error("🔥 Update Info Error:", err);
+        return res.send(`
+            <script>
+                alert('เกิดข้อผิดพลาด: ${err.message.replace(/'/g, "")}');
+                window.history.back();
+            </script>
+        `);
     }
-}
+});
 
 
 
@@ -280,7 +325,7 @@ app.post('/regisSeller', async (req, res) => {
 app.post('/checkLogin', async (req, res) => {
     try {
         const { username, password } = req.body;
-
+        res.clearCookie('name');
         res.clearCookie('Seller_ID');
         res.clearCookie('User_ID');
         res.clearCookie('img');
@@ -295,6 +340,7 @@ app.post('/checkLogin', async (req, res) => {
             if (u.User_Password === password) {
                 console.log("Login success: User Role");
 
+                res.cookie('name', u.User_Name);
                 res.cookie('User_ID', u.User_ID);
                 res.cookie('img', u.User_img);
 
@@ -314,7 +360,7 @@ app.post('/checkLogin', async (req, res) => {
 
             if (s.Seller_Password === password) {
                 console.log("Login success: Seller Role");
-
+                res.cookie('name', s.Seller_Name);
                 res.cookie('Seller_ID', s.Seller_ID);
                 res.cookie('img', s.Seller_img);
 
@@ -334,9 +380,11 @@ app.post('/checkLogin', async (req, res) => {
     }
 });
 
-app.get('/logout', (req,res) => {
-    res.clearCookie('username');
-    res.clearCookie('img');
+app.post('/logout', (req,res) => {
+        res.clearCookie('name');
+        res.clearCookie('Seller_ID');
+        res.clearCookie('User_ID');
+        res.clearCookie('img');
     return res.redirect('/Login/login.html');
 })
 

@@ -1,18 +1,54 @@
-function checkCookie(){
-    if(getCookie("Seller_ID") == false && getCookie("User_Name") == false){
-        // ถ้าไม่มีทั้ง seller_id และ User_Name ให้เด้งไปหน้า login
-        // window.location = "login.html"; 
-    }
-}
-checkCookie();
-let bookData = [];
-// แทนที่จะ fetch จากไฟล์ JSON
 function getCookie(name) {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
     return null;
 }
+function checkLogin() {
+    const userName = getCookie("name");
+    const imgg = getCookie("img");
+
+    const loginBtn = document.getElementById("login");
+    const unameLink = document.getElementById("Uname");
+    const imgnow = document.getElementById("profile");
+
+    if (userName || imgg) {
+         if(loginBtn) {
+            loginBtn.innerText = "LOGOUT";
+            loginBtn.onclick = async (e) => {
+                e.preventDefault();
+                try {
+                    const response = await fetch('/logout', { method: 'POST', credentials: 'same-origin' });
+                    if(response.ok) {
+                        document.cookie = "name=; max-age=0; path=/";
+                        document.cookie = "Seller_ID=; max-age=0; path=/";
+                        location.reload();
+                    }
+                } catch(err) {
+                    console.error('Logout failed', err);
+                }
+            }
+        }
+
+        if(unameLink && userName) unameLink.innerText = userName;
+        imgnow.src = '../img/Profile_Img/' + imgg;
+    } 
+    
+    else {
+        if(loginBtn) {
+            loginBtn.innerText = "LOGIN/REGISTER";
+            loginBtn.onclick = () => {
+                location.href = "../Login/login.html";
+            }
+        }
+        if(unameLink) unameLink.innerText = "";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", checkLogin);
+let bookData = [];
+// แทนที่จะ fetch จากไฟล์ JSON
+
 fetch('/getBooks')   // เรียก API ใหม่จาก Node.js
   .then(res => res.json())
   .then(data => {
