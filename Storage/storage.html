@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Storage Seller</title>
-    <link type="text/css" rel="stylesheet" href="css/storageseller.css">
-    <script type="text/javascript" src="Stroageseller.js" defer></script>
+    <link type="text/css" rel="stylesheet" href="css/storage.css">
+    <script type="text/javascript" src="storage.js" defer></script>
     <link href="https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Noto+Sans+Thai:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -15,9 +15,9 @@
                 <div class="top-left">
                     <img id="tab-search" src="../img/Logo_Icon/Tab.png" class="click-img">
 
-                  <a  href="../Hompage/Home.html">
-                   <img id="logo" src="../img/Logo_Icon/Logo.png" alt="Home" class="click-img">
-                  </a>
+                 
+                   <img id="logo" onclick="location.href='../Hompage/Home.html'" src="../img/Logo_Icon/Logo.png" alt="Home" class="click-img">
+                  
                   
                 </div>
                 <div class="top-right">
@@ -25,14 +25,15 @@
                         <img id="searchimg" src="../img/Logo_Icon/search.png">
                         <input id="search" type="text" placeholder="ค้นหา">
                     </div>
-                    <img id="basket" src="../img/Logo_Icon/basket.png" class="click-img">
+
+                   <img id="basket" onclick="location.href='../Checkout/Checkout.html'" src="../img/Logo_Icon/basket.png" class="click-img" alt="basket">
+
                     <img id="lineSpace" src="../img/Logo_Icon/LineSpace.png">
                     <img id="profile" src="../img/Logo_Icon/avatar.png" class="click-img">
                     <a class="login-register" href="../Login/login.html">LOGIN/REGISTER</a>
                 </div>
             </div>
 
-            <!-- SIDE MENU -->
             <div class="overlay-container">
                 <div id="overlay"></div>
                 <div id="side-menu">
@@ -44,12 +45,12 @@
                 </div>
             </div>
 
-            <div class="nav-bottom">
-                <a class="tag-book" href="#">มังงะ</a>
-                <a class="tag-book" href="#">นิยาย</a>
-                <a class="tag-book" href="#">หนังสือปรัญชา</a>
-                <a class="tag-book" href="#">หนังสือพระ</a>
-            </div>
+           <div class="nav-bottom">
+    <a class="tag-book" data-category="Manga">มังงะ</a>
+    <a class="tag-book" data-category="Novel">นิยาย</a>
+    <a class="tag-book" data-category="Philosophy">หนังสือปรัญชา</a>
+    <a class="tag-book" data-category="Buddhist">หนังสือพระ</a>
+</div>
         </div>
 
         <!-- QUICK VIEW -->
@@ -73,7 +74,7 @@
               </div>
               <p class="quickview-detail" id="quickview-detail">
               </p>
-              <hr><input class="quickview-button" type="submit" value="สั่งซื้อเลย">
+              <hr><input class="quickview-button" id="Buynow" type="submit" value="สั่งซื้อเลย">
             </div>
           </div>
         </div>
@@ -81,9 +82,9 @@
 
         <!-- STORAGE -->
         <div class="storage-container">
+
             <div class="stroage-header">
-                สินค้า
-                <button class="submit-btn" href="../Sell/Sell.html">เพิ่มสินค้า</button>
+                หนังสือทั้งหมด
             </div>
             <br>
             <div class="book-box">

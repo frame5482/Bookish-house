@@ -80,8 +80,15 @@ function renderBooks(data) {
         if (response.redirected) {
             window.location.href = response.url;
         } else {
+        const text = await response.text();
+        if (text.includes('จำนวนหนังสือไม่เพียงพอ')) {
+            alert(`หนังสือ "${book.Book_Name}" หมดแล้ว!`);
+        } else if (text.includes('ใส่รถเข็นแล้ว')) {
             alert(`ท่านได้หยิบ "${book.Book_Name}" ใส่รถเข็นแล้ว!`);
+        } else {
+            alert(text); 
         }
+    }
 
     } catch (err) {
         console.error('Add to Order ล้มเหลว:', err);
@@ -127,7 +134,7 @@ function openQuickView(book) {
     qvImg.src = '../img/Book_Img/' + book.Book_Img;
     
     qvDetail.innerText = book.Book_Detail || "รายละเอียดเพิ่มเติมของหนังสือเล่มนี้ กำลังรอการบันทึกจากบรรณารักษ์...";
-    qvquantity.innerText = "คงเหลือ: " + (book.Book_Quantity || "ไม่ระบุ") + " เล่ม";
+    qvquantity.innerText = "คงเหลือ: " + (book.Book_Quantity || "0") + " เล่ม";
     currentQuantity = 1;
     if(qvQuantityDisplay) qvQuantityDisplay.innerText = 'x' + currentQuantity;
 
@@ -160,8 +167,14 @@ function openQuickView(book) {
                 if(response.redirected) {
                     window.location.href = response.url; 
                 } else {
-                    const result = await response.text();
-                    alert(`ท่านได้สั่งซื้อ "${currentBook.Book_Name}" จำนวน ${currentQuantity} เล่มแล้ว!`);
+                   const text = await response.text();
+        if (text.includes('จำนวนหนังสือไม่เพียงพอ')) {
+            alert(`หนังสือ "${book.Book_Name}" หมดแล้ว!`);
+        } else if (text.includes('ใส่รถเข็นแล้ว')) {
+            alert(`ท่านได้หยิบ "${book.Book_Name}" ใส่รถเข็นแล้ว!`);
+        } else {
+            alert(text); 
+        }
                     closeQuickView();
                 }
             } catch(err) {
@@ -204,7 +217,6 @@ if (addButtons.length >= 2) {
 const qvBuyBtn = document.querySelector('.quickview-button');
 if(qvBuyBtn) {
     qvBuyBtn.addEventListener('click', () => {
-        alert(`สั่งซื้อ "${qvTitle.innerText}" จำนวน ${currentQuantity} เล่ม เรียบร้อยแล้วขอรับ!`);
         closeQuickView();
     });
 }

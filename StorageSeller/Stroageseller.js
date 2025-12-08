@@ -70,7 +70,7 @@ function renderBooks(data) {
 
             const QuantityDiv = document.createElement('div');
             QuantityDiv.className = 'book-quantity';
-            QuantityDiv.innerText = "คงเหลือ: " + (book.Book_Quantity || "ไม่ระบุ") + " เล่ม";
+            QuantityDiv.innerText = "คงเหลือ: " + (book.Book_Quantity || "0") + " เล่ม";
             itemWrapper.appendChild(QuantityDiv);
             // --- ส่วนราคา ---
             const priceDiv = document.createElement('div');
